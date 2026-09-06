@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:news.naver.com)",
+      "WebFetch(domain:n.news.naver.com)",
+      "WebFetch(domain:blog.naver.com)",
+      "WebFetch(domain:cafe.naver.com)",
+      "WebFetch(domain:map.naver.com)",
+      "WebFetch(domain:www.seoul.go.kr)",
+      "WebFetch(domain:mediahub.seoul.go.kr)",
+      "WebFetch(domain:opengov.seoul.go.kr)",
+      "WebFetch(domain:cleanup.seoul.go.kr)",
+      "WebFetch(domain:www.molit.go.kr)",
+      "WebFetch(domain:www.hankyung.com)",
+      "WebFetch(domain:www.mk.co.kr)",
+      "WebFetch(domain:biz.chosun.com)",
+      "WebFetch(domain:www.yna.co.kr)",
+      "mcp__fetch",
+      "mcp__playwright",
+      "Bash(python3 scripts/*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(mkdir:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)"
+    ]
+  }
+}

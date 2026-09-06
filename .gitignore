@@ -1,0 +1,7 @@
+# playwright-mcp 임시 출력물 (스크린샷·다운로드 원본)
+# 최종 이미지는 각 프로젝트의 이미지/ 폴더로 옮겨서 커밋함
+_downloads/
+
+.DS_Store
+__pycache__/
+*.pyc
