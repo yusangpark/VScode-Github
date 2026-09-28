@@ -1,0 +1,494 @@
+<title>유상 PM 보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: 주간 작전 보드 — 머리(이번 주 요약 숫자) → 이번 주/이번 달 체크 두 단 → 재고·주기·제안 → 축별 사다리 → 로드맵. 축은 색 띠로 부호화 */
+:root{
+  --ground:#F4F3F7; --surface:#FFFFFF; --sunk:#ECE9F1;
+  --ink:#1B1823; --ink-2:#4B4657; --muted:#777184; --line:#DDD8E5; --line-2:#C5BED2;
+  --accent:#6A3FA0;
+  --a-purpleant:#7B4E95; --a-foorog:#B4492F; --a-career:#1D6A86; --a-side:#9A6A12; --a-asset:#2E7D5B; --a-health:#5E6B75; --a-pm:#555064;
+  --ok:#2E7D5B; --warn:#A06A0C; --bad:#A8443B;
+  --display:"Noto Serif KR","Nanum Myeongjo",Georgia,serif;
+  --body:"IBM Plex Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#141219; --surface:#1C1923; --sunk:#25212E;
+    --ink:#ECE9F2; --ink-2:#BEB7CB; --muted:#8C8599; --line:#312C3B; --line-2:#443D51;
+    --accent:#B99AE6;
+    --a-purpleant:#C4A0DC; --a-foorog:#E8826A; --a-career:#6FB6D2; --a-side:#D9AC57; --a-asset:#63B189; --a-health:#9AA8B3; --a-pm:#A9A3B8;
+    --ok:#63B189; --warn:#D9A441; --bad:#E08277;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141219; --surface:#1C1923; --sunk:#25212E;
+  --ink:#ECE9F2; --ink-2:#BEB7CB; --muted:#8C8599; --line:#312C3B; --line-2:#443D51;
+  --accent:#B99AE6;
+  --a-purpleant:#C4A0DC; --a-foorog:#E8826A; --a-career:#6FB6D2; --a-side:#D9AC57; --a-asset:#63B189; --a-health:#9AA8B3; --a-pm:#A9A3B8;
+  --ok:#63B189; --warn:#D9A441; --bad:#E08277;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-inline:16px;padding-block:0 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* header */
+.mast{padding-block:40px 24px;border-bottom:1.5px solid var(--ink)}
+.mast .lbl{color:var(--accent)}
+.mast h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,5vw,42px);letter-spacing:-.03em;line-height:1.2;margin-top:10px}
+.mast .theme{font-size:16px;color:var(--ink-2);margin-top:8px;max-width:60ch}
+.mast .rule{font-size:13.5px;color:var(--muted);margin-top:6px;max-width:66ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:22px}
+.stat{background:var(--surface);padding:12px 14px;min-width:0}
+.stat .v{font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.2;margin-top:4px;font-variant-numeric:tabular-nums}
+.stat .s{font-size:12px;color:var(--muted);margin-top:2px}
+.meter{height:5px;background:var(--sunk);margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+
+/* nav */
+nav.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--ground);border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+nav.jump .in{max-width:1080px;margin:0 auto;display:flex;gap:2px;overflow-x:auto}
+nav.jump a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:11px 10px;border-bottom:2px solid transparent}
+nav.jump a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+
+section{padding-block:40px 4px;scroll-margin-top:52px}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(20px,3vw,25px);letter-spacing:-.025em;line-height:1.3}
+.sh .when{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.deck{color:var(--muted);font-size:14px;margin-bottom:18px;max-width:66ch}
+
+/* axis chip */
+.ax{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--c);white-space:nowrap;font-weight:500}
+.ax::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+[data-axis="purpleant"]{--c:var(--a-purpleant)} [data-axis="foorog"]{--c:var(--a-foorog)} [data-axis="career"]{--c:var(--a-career)}
+[data-axis="side"]{--c:var(--a-side)} [data-axis="asset"]{--c:var(--a-asset)} [data-axis="health"]{--c:var(--a-health)} [data-axis="pm"]{--c:var(--a-pm)}
+
+/* checklists */
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.list{background:var(--surface);border:1px solid var(--line)}
+.list-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.list-h b{font-size:14px}
+.list-h .cnt{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.task{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px;padding:11px 16px;border-bottom:1px dashed var(--line);cursor:pointer;border-left:3px solid transparent}
+.task:last-child{border-bottom:0}
+.task:hover{background:var(--sunk)}
+.task.must{border-left-color:var(--c)}
+.task input{appearance:none;width:17px;height:17px;margin:3px 0 0;border:1.5px solid var(--line-2);border-radius:3px;background:var(--surface);display:grid;place-content:center;cursor:pointer}
+.task input:checked{background:var(--c);border-color:var(--c)}
+.task input:checked::after{content:"";width:9px;height:5px;border-left:2px solid var(--surface);border-bottom:2px solid var(--surface);transform:rotate(-45deg) translate(1px,-1px)}
+.task .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.task .t{font-size:14.5px;font-weight:500;letter-spacing:-.01em}
+.task .n{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.task .mustb{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--c);border:1px solid var(--c);padding:0 5px;border-radius:2px}
+.task.done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line-2)}
+.sync{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px;text-align:right}
+
+/* hours */
+.hours{display:grid;gap:8px;margin-top:22px}
+.hr{display:grid;grid-template-columns:96px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:13px}
+.hr .track{height:10px;background:var(--sunk)}
+.hr .track i{display:block;height:100%;background:var(--c)}
+.hr .h{font-family:var(--mono);text-align:right;color:var(--ink-2)}
+.hr .nt{grid-column:2/-1;font-size:12px;color:var(--muted);margin-top:-6px}
+
+/* tables */
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px;line-height:1.55}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--sunk);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td .sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+td.nw{white-space:nowrap}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:2px;white-space:nowrap;border:1px solid currentColor}
+.p-none{color:var(--bad)} .p-check{color:var(--warn)} .p-ok{color:var(--ok)}
+.p-live{color:var(--ok)} .p-restart{color:var(--warn)} .p-planned{color:var(--accent)} .p-later{color:var(--muted)}
+.p-behind{color:var(--bad)} .p-stale{color:var(--warn)}
+
+/* week grid */
+.wg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:18px}
+@media (max-width:760px){.wg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.wd{background:var(--surface);padding:10px 10px 12px;min-width:0}
+.wd .d{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.wd .it{display:block;font-size:12.5px;line-height:1.45;padding:4px 0 4px 8px;border-left:2px solid var(--c);margin-bottom:5px;color:var(--ink-2)}
+
+/* proposals */
+.props{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.prop{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);padding:13px 15px;min-width:0;display:flex;flex-direction:column;gap:5px}
+.prop .meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.prop .when{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.prop h3{font-size:14.5px;font-weight:600;letter-spacing:-.01em;line-height:1.45}
+.prop .fmt{font-size:12px;color:var(--c);font-weight:500}
+.prop p{font-size:13px;color:var(--ink-2)}
+
+/* axes */
+.axes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:16px}
+.axis{background:var(--surface);border:1px solid var(--line);min-width:0}
+.axis-h{padding:14px 16px 12px;border-bottom:1px solid var(--line);border-top:4px solid var(--c)}
+.axis-h h3{font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:-.02em}
+.axis-h .role{font-size:12.5px;color:var(--muted)}
+.kv{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 12px;padding:12px 16px;font-size:13.5px;border-bottom:1px solid var(--line)}
+.kv dt{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em;padding-top:2px}
+.kv dd{margin:0;color:var(--ink-2)}
+.kv dd b{color:var(--ink)}
+.ladder{padding:10px 16px 12px;border-bottom:1px solid var(--line)}
+.rung{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.rung:last-child{border-bottom:0}
+.rung .st{font-weight:500}
+.rung .sz{font-family:var(--mono);font-size:12px;text-align:right;white-space:nowrap}
+.rung .gt{grid-column:1/-1;font-size:12px;color:var(--muted)}
+.rung.key .st,.rung.key .sz{color:var(--c);font-weight:600}
+.phs{padding:10px 16px 12px;display:grid;gap:6px;border-bottom:1px solid var(--line)}
+.ph{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;font-size:13px}
+.ph .w{font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:1px}
+.ph b{font-weight:600}
+.ph span{color:var(--muted)}
+.ph.now{background:var(--sunk);margin-inline:-8px;padding:4px 8px}
+.ph.now .w{color:var(--c);font-weight:600}
+.stop{padding:10px 16px 12px;font-size:12.5px;color:var(--ink-2)}
+.stop b{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--bad);margin-right:6px}
+
+/* roadmap */
+.road{list-style:none;padding:0;margin:0;border-left:2px solid var(--line-2)}
+.road li{position:relative;padding:0 0 18px 22px;display:grid;grid-template-columns:86px minmax(0,1fr);gap:12px}
+.road li::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--ground);border:2px solid var(--line-2)}
+.road li.now::before{background:var(--accent);border-color:var(--accent)}
+.road li.goal::before{border-color:var(--accent)}
+.road .w{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--muted)}
+.road li.now .w{color:var(--accent)}
+.road b{display:block;font-size:14.5px}
+.road span{font-size:13px;color:var(--muted)}
+@media (max-width:520px){.road li{grid-template-columns:1fr;gap:2px}}
+
+/* ops */
+.ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.op{background:var(--surface);padding:14px 16px;min-width:0}
+.op h3{font-size:14.5px;font-weight:600;margin:4px 0 8px}
+.op ol,.op ul{margin:0;padding-left:1.2em;font-size:13px;color:var(--ink-2)}
+.op li{margin-bottom:4px}
+.op code,.say{font-family:var(--mono);font-size:12px;background:var(--sunk);padding:1px 5px;border-radius:2px;color:var(--ink)}
+.notes{margin-top:18px;display:grid;gap:14px}
+.notes h3{font-size:14px;font-weight:600;margin-bottom:6px}
+.notes ul{margin:0;padding-left:1.2em;font-size:13px;color:var(--ink-2)}
+.notes li{margin-bottom:4px}
+.foot{margin-top:40px;padding-top:16px;border-top:1.5px solid var(--ink);font-size:12.5px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<script id="pm-data" type="application/json">/*PM_DATA*/</script>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="lbl" id="h-eyebrow">PM 보드</div>
+    <h1 id="h-title">이번 주 할 일</h1>
+    <p class="theme" id="h-theme"></p>
+    <p class="rule" id="h-rule"></p>
+    <div class="stats">
+      <div class="stat"><div class="lbl">이번 주</div><div class="v" id="st-week">0 / 0</div><div class="meter"><i id="mt-week"></i></div></div>
+      <div class="stat"><div class="lbl">이번 달</div><div class="v" id="st-month">0 / 0</div><div class="meter"><i id="mt-month"></i></div></div>
+      <div class="stat"><div class="lbl">미업로드 · 확인 필요</div><div class="v" id="st-inv">0</div><div class="s" id="st-inv-s"></div></div>
+      <div class="stat"><div class="lbl">다음 주간 PM</div><div class="v" id="st-next" style="font-size:16px"></div><div class="s" id="st-next-s"></div></div>
+      <div class="stat"><div class="lbl">2030 관문까지</div><div class="v" id="st-2030"></div><div class="s">순금융자산 5억</div></div>
+    </div>
+  </header>
+</div>
+
+<nav class="jump" aria-label="섹션 이동"><div class="in">
+  <a href="#week">이번 주</a><a href="#inventory">미업로드</a><a href="#cadence">발행 주기</a>
+  <a href="#ideas">만들 콘텐츠</a><a href="#gauges">계기판</a><a href="#axes">축별 성장</a><a href="#road">로드맵</a><a href="#ops">운영법</a>
+</div></nav>
+
+<div class="wrap">
+  <section id="week">
+    <div class="sh"><h2>이번 주 · 이번 달</h2><span class="when" id="wk-range"></span></div>
+    <p class="deck">체크하면 저장되고, 다음 주간 PM 때 클로드가 이 체크 상태를 읽어서 회고함. 왼쪽 색 띠가 있는 3개가 이번 주 최소선.</p>
+    <div class="two">
+      <div>
+        <div class="list"><div class="list-h"><b id="wk-id">이번 주</b><span class="cnt" id="wk-cnt"></span></div><div id="wk-list"></div></div>
+        <div class="hours" id="hours"></div>
+      </div>
+      <div class="list"><div class="list-h"><b id="mo-id">이번 달</b><span class="cnt" id="mo-cnt"></span></div><div id="mo-list"></div></div>
+    </div>
+    <p class="sync" id="sync">체크 상태 불러오는 중</p>
+  </section>
+
+  <section id="inventory">
+    <div class="sh"><h2>만들었는데 안 올린 것</h2></div>
+    <p class="deck" id="inv-note"></p>
+    <div class="tw"><table>
+      <thead><tr><th>축</th><th>무엇</th><th>올릴 곳</th><th>상태</th><th>다음 조치</th></tr></thead>
+      <tbody id="inv-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="cadence">
+    <div class="sh"><h2>발행 주기</h2></div>
+    <p class="deck">주 10시간 안에서 돌아가게 잡은 한 주. 퍼플앤트 인스타 칸은 11월 첫 게시물부터 켜짐.</p>
+    <div class="wg" id="weekgrid"></div>
+    <div class="tw"><table>
+      <thead><tr><th>축</th><th>채널</th><th>주기</th><th class="nw">월 편수</th><th>상태</th><th>이유</th></tr></thead>
+      <tbody id="cad-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="ideas">
+    <div class="sh"><h2>앞으로 만들 콘텐츠</h2></div>
+    <p class="deck">퍼플앤트 블로그 주제는 매번 스킬 1단계(핫이슈 10개 + 포스팅_인덱스 중복 확인)가 최종 결정함. 여기는 방향과 시리즈만.</p>
+    <div class="props" id="props"></div>
+  </section>
+
+  <section id="gauges">
+    <div class="sh"><h2>매월 1일 계기판</h2></div>
+    <p class="deck">숫자는 시트·채널에서 마지막으로 확인한 값. 월간 PM 때 새 숫자를 알려주면 여기부터 갱신함.</p>
+    <div class="tw"><table>
+      <thead><tr><th>지표</th><th>현재</th><th>기준일</th><th>목표</th><th>상태</th></tr></thead>
+      <tbody id="g-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="axes">
+    <div class="sh"><h2>축별 성장 — 어떻게 자산이 되나</h2></div>
+    <p class="deck">사다리는 순서대로만 열림. 앞 칸이 뒷 칸의 재료라서 동시에 켜면 전부 죽음. 강조된 칸이 각 축의 최대 지렛대.</p>
+    <div class="axes" id="axes-grid"></div>
+  </section>
+
+  <section id="road">
+    <div class="sh"><h2>2026 → 2050 로드맵</h2></div>
+    <p class="deck">구간마다 한 가지. 현금흐름(S2) 없이 갈아타기(S4)를 하면 대출에 목이 졸려 사업화를 못 함.</p>
+    <ul class="road" id="road-list"></ul>
+  </section>
+
+  <section id="ops">
+    <div class="sh"><h2>운영법</h2></div>
+    <p class="deck">보드는 레포의 <code class="say">PM/pm_data.json</code> 하나에서 만들어짐. 숫자와 할 일은 그 파일만 고치면 됨.</p>
+    <div class="ops">
+      <div class="op"><div class="lbl">매주 월요일 · 10분</div><h3>「주간 PM 해줘」</h3><ol>
+        <li>맥에서 <code>python3 scripts/pm_sync.py</code> — 블로그 업로드 대조</li>
+        <li>클로드가 이 보드의 체크 상태를 읽고 지난주 회고 3줄</li>
+        <li>안 된 것 이월 또는 삭제, 이번 주 할 일 8개 이하로 재작성</li>
+        <li>보드 재발행 · 로그 한 줄</li>
+      </ol></div>
+      <div class="op"><div class="lbl">매월 1일 · 30분</div><h3>「월간 PM 해줘」</h3><ol>
+        <li>자산 시트 숫자 3개(순자산·순금융자산·부업 현금수익) 알려주기</li>
+        <li>채널 숫자(블로그 일방문·팔로워·저장률) 갱신</li>
+        <li>궤도 판정 → 발행 주기·시간 배분 조정</li>
+        <li>이번 달 할 일 12개 이하로 재작성</li>
+      </ol></div>
+      <div class="op"><div class="lbl">분기 · 1시간</div><h3>「분기 PM 해줘」</h3><ul>
+        <li>로드맵 구간 판정 (S1 끝났나)</li>
+        <li>중단·전환 기준에 걸린 축 확인</li>
+        <li>원본 로드맵 아티팩트 중 낡은 것 정리</li>
+      </ul></div>
+    </div>
+    <div class="notes">
+      <div><h3>로드맵끼리 충돌해서 이렇게 정리함</h3><ul id="conf"></ul></div>
+      <div><h3>원본 문서</h3><ul id="src"></ul></div>
+      <div><h3>PM 로그</h3><ul id="log"></ul></div>
+    </div>
+    <p class="foot" id="foot"></p>
+  </section>
+</div>
+
+<script>
+(function(){
+  var D = JSON.parse(document.getElementById('pm-data').textContent);
+  var AX = {purpleant:'퍼플앤트', foorog:'푸로그', career:'현업', side:'사이드', asset:'자산', health:'건강', pm:'PM'};
+  var INV = {none:['p-none','미업로드'], check:['p-check','확인 필요'], ok:['p-ok','업로드됨']};
+  var CAD = {live:'운영중', restart:'재개 필요', planned:'예정', later:'나중'};
+  var GA = {ok:['p-ok','궤도'], behind:['p-behind','미달'], stale:['p-stale','미기록']};
+  function $(id){ return document.getElementById(id); }
+  function el(tag, cls, txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+  function chip(axis){ var s=el('span','ax',AX[axis]||axis); s.dataset.axis=axis; return s; }
+
+  /* header */
+  $('h-eyebrow').textContent = 'PM 보드 · ' + D.week.id + ' · ' + D.updated + ' 갱신';
+  $('h-title').textContent = D.week.range;
+  $('h-theme').textContent = D.week.theme;
+  $('h-rule').textContent = D.principle;
+  $('wk-range').textContent = D.week.range + ' · ' + D.month.id;
+  $('wk-id').textContent = '이번 주 · ' + D.week.id;
+  $('mo-id').textContent = '이번 달 · ' + D.month.id + ' — ' + D.month.theme;
+  $('st-next').textContent = D.next_pm.weekly;
+  $('st-next-s').textContent = '월간 ' + D.next_pm.monthly;
+  var days = Math.ceil((new Date(2030,11,31) - new Date(D.updated+'T00:00:00'))/86400000);
+  $('st-2030').textContent = days.toLocaleString('ko-KR') + '일';
+
+  /* tasks */
+  var boxes = [];
+  function taskRow(t){
+    var lab = el('label','task'+(t.must?' must':'')); lab.dataset.axis = t.axis;
+    var cb = el('input'); cb.type='checkbox'; cb.id='cb-'+t.id; cb.dataset.id=t.id;
+    var body = el('span'); var top = el('span','top');
+    top.appendChild(el('span','t',t.text)); top.appendChild(chip(t.axis));
+    if(t.must){ top.appendChild(el('span','mustb','최소선')); }
+    body.appendChild(top);
+    if(t.note) body.appendChild(el('span','n',t.note));
+    lab.appendChild(cb); lab.appendChild(body);
+    boxes.push(cb);
+    return lab;
+  }
+  D.week.tasks.forEach(function(t){ $('wk-list').appendChild(taskRow(t)); });
+  D.month.tasks.forEach(function(t){ $('mo-list').appendChild(taskRow(t)); });
+
+  var total = D.hours.reduce(function(a,h){return a+h.h;},0);
+  D.hours.forEach(function(h){
+    var r = el('div','hr'); r.dataset.axis = h.axis;
+    r.appendChild(chip(h.axis));
+    var tr = el('span','track'); var i = el('i'); i.style.width = (h.h/total*100)+'%'; tr.appendChild(i); r.appendChild(tr);
+    r.appendChild(el('span','h',h.h+'h'));
+    r.appendChild(el('span','nt',h.note));
+    $('hours').appendChild(r);
+  });
+  var hl = el('div','lbl','본업 외 주 '+total+'시간 배분 · 건강은 별도 매일 40분'); $('hours').insertBefore(hl, $('hours').firstChild);
+
+  var state = {};
+  function paint(){
+    boxes.forEach(function(b){ b.checked = !!state[b.dataset.id]; b.closest('.task').classList.toggle('done', b.checked); });
+    function c(list){ var n=list.filter(function(t){return state[t.id];}).length; return [n,list.length]; }
+    var w=c(D.week.tasks), m=c(D.month.tasks);
+    $('st-week').textContent = w[0]+' / '+w[1]; $('mt-week').style.width = (w[0]/w[1]*100)+'%';
+    $('st-month').textContent = m[0]+' / '+m[1]; $('mt-month').style.width = (m[0]/m[1]*100)+'%';
+    $('wk-cnt').textContent = w[0]+' / '+w[1]; $('mo-cnt').textContent = m[0]+' / '+m[1];
+  }
+
+  /* inventory */
+  var nNone=0, nCheck=0;
+  $('inv-note').textContent = D.inventory_note;
+  D.inventory.forEach(function(r){
+    var tr = el('tr');
+    var td0 = el('td'); td0.appendChild(chip(r.axis)); tr.appendChild(td0);
+    var td1 = el('td',null,r.item); td1.appendChild(el('span','sub',r.made)); tr.appendChild(td1);
+    tr.appendChild(el('td','nw',r.channel));
+    var p = INV[r.status]||INV.check; var td3 = el('td'); td3.appendChild(el('span','pill '+p[0],p[1])); tr.appendChild(td3);
+    tr.appendChild(el('td',null,r.action));
+    if(r.status==='none') nNone++; else if(r.status==='check') nCheck++;
+    $('inv-body').appendChild(tr);
+  });
+  $('st-inv').textContent = nNone + ' · ' + nCheck;
+  $('st-inv-s').textContent = '미업로드 '+nNone+'건 · 확인 필요 '+nCheck+'건';
+
+  /* cadence */
+  D.weekgrid.forEach(function(d){
+    var c = el('div','wd'); c.appendChild(el('div','d',d.day));
+    d.items.forEach(function(it){ var s=el('span','it',it.t); s.dataset.axis=it.axis; c.appendChild(s); });
+    $('weekgrid').appendChild(c);
+  });
+  D.cadence.forEach(function(r){
+    var tr = el('tr');
+    var td0 = el('td'); td0.appendChild(chip(r.axis)); tr.appendChild(td0);
+    tr.appendChild(el('td','nw',r.channel));
+    tr.appendChild(el('td',null,r.rhythm));
+    tr.appendChild(el('td','mono',r.per_month? String(r.per_month) : '—'));
+    var td4 = el('td'); td4.appendChild(el('span','pill p-'+r.status,(CAD[r.status]||r.status)+(r.start?' · '+r.start:''))); tr.appendChild(td4);
+    tr.appendChild(el('td',null,r.why));
+    $('cad-body').appendChild(tr);
+  });
+
+  /* proposals */
+  D.proposals.forEach(function(p){
+    var c = el('article','prop'); c.dataset.axis = p.axis;
+    var m = el('div','meta'); m.appendChild(chip(p.axis)); m.appendChild(el('span','when',p.when)); c.appendChild(m);
+    c.appendChild(el('h3',null,p.title)); c.appendChild(el('span','fmt',p.format)); c.appendChild(el('p',null,p.why));
+    $('props').appendChild(c);
+  });
+
+  /* gauges */
+  D.gauges.forEach(function(g){
+    var tr = el('tr');
+    var td0 = el('td',null,g.name); if(g.hint) td0.appendChild(el('span','sub',g.hint)); tr.appendChild(td0);
+    tr.appendChild(el('td','mono nw',g.now));
+    tr.appendChild(el('td','mono nw',g.asof));
+    tr.appendChild(el('td','mono',g.target+' · '+g.by));
+    var p = GA[g.state]||GA.stale; var td4=el('td'); td4.appendChild(el('span','pill '+p[0],p[1])); tr.appendChild(td4);
+    $('g-body').appendChild(tr);
+  });
+
+  /* axes */
+  D.axes.forEach(function(a){
+    var c = el('article','axis'); c.dataset.axis = a.id;
+    var h = el('div','axis-h'); h.appendChild(el('h3',null,a.name)); h.appendChild(el('div','role',a.role)); c.appendChild(h);
+    var kv = el('dl','kv');
+    kv.appendChild(el('dt',null,'지금')); kv.appendChild(el('dd',null,a.now));
+    kv.appendChild(el('dt',null,'다음')); var dd=el('dd'); dd.appendChild(el('b',null,a.next)); kv.appendChild(dd);
+    c.appendChild(kv);
+    var ld = el('div','ladder'); ld.appendChild(el('div','lbl','성장 사다리'));
+    a.ladder.forEach(function(r){
+      var row = el('div','rung'+(r.key?' key':''));
+      row.appendChild(el('span','st',r.step)); row.appendChild(el('span','sz',r.size)); row.appendChild(el('span','gt','열리는 조건 · '+r.gate));
+      ld.appendChild(row);
+    });
+    c.appendChild(ld);
+    if(a.phases.length){
+      var ph = el('div','phs'); ph.appendChild(el('div','lbl','단기 구간'));
+      a.phases.forEach(function(p){
+        var r = el('div','ph'+(p.now?' now':'')); r.appendChild(el('span','w',p.when));
+        var b = el('div'); b.appendChild(el('b',null,p.name+' ')); b.appendChild(el('span',null,p.goal)); r.appendChild(b);
+        ph.appendChild(r);
+      });
+      c.appendChild(ph);
+    }
+    var st = el('p','stop'); st.appendChild(el('b',null,'선')); st.appendChild(document.createTextNode(a.stop)); c.appendChild(st);
+    $('axes-grid').appendChild(c);
+  });
+
+  /* roadmap */
+  D.roadmap.forEach(function(r){
+    var li = el('li', r.now?'now':(r.goal_mark?'goal':''));
+    li.appendChild(el('span','w',r.when));
+    var b = el('div'); b.appendChild(el('b',null,r.name)); b.appendChild(el('span',null,r.goal)); li.appendChild(b);
+    $('road-list').appendChild(li);
+  });
+
+  /* notes */
+  D.conflicts.forEach(function(c){ $('conf').appendChild(el('li',null,c)); });
+  D.sources.forEach(function(s){
+    var li = el('li'); var a = el('a',null,s.name); a.href=s.url; a.target='_blank'; a.rel='noopener';
+    li.appendChild(a); li.appendChild(document.createTextNode(' · '+s.date+' · '+s.role)); $('src').appendChild(li);
+  });
+  D.log.slice().reverse().forEach(function(l){ $('log').appendChild(el('li',null,l.date+' — '+l.text)); });
+  $('foot').textContent = '계획 프레임이지 투자 자문이 아님. 매수·매도·대출·세금은 본인 판단과 세무사·중개사 확인. 본업 소속·사내 자료는 어떤 채널에도 노출하지 않음.';
+
+  /* check state: db 우선, 없으면 이 기기에만 */
+  var KEY = 'pm-board-checks', db = null;
+  try { state = JSON.parse(localStorage.getItem(KEY)||'{}') || {}; } catch(e){ state = {}; }
+  paint();
+  $('sync').textContent = '이 기기에만 저장됨';
+  function saveLocal(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      var id = b.dataset.id;
+      if(b.checked) state[id] = true; else delete state[id];
+      paint(); saveLocal();
+      if(db){
+        db.collection('checks').doc(id).set({done:b.checked, at:new Date().toISOString(), period: id.split('-')[0]})
+          .then(function(){ $('sync').textContent = '저장됨 · 클로드가 다음 PM 때 읽음'; })
+          .catch(function(e){ $('sync').textContent = (e && e.code==='invalid_argument') ? '읽기 전용 — 체크는 이 기기에만 남음' : '저장 실패 · 이 기기에는 남아 있음'; });
+      }
+    });
+  });
+
+  if(window.claude && window.claude.use){
+    window.claude.use('db').then(function(ns){
+      if(!ns) return;
+      db = ns;
+      db.collection('checks').onSnapshot(function(snap){
+        var next = {};
+        snap.docs.forEach(function(d){ var v=d.data(); if(v && v.done) next[d.id]=true; });
+        state = next; saveLocal(); paint();
+        $('sync').textContent = '동기화됨 · 폰·PC 어디서 체크해도 같음';
+      }, function(){ $('sync').textContent = '동기화 끊김 · 이 기기에만 저장 중'; });
+    }).catch(function(){});
+  }
+})();
+</script>

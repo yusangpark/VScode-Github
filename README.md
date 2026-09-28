@@ -12,6 +12,9 @@ CLAUDE.md                      두 축 공통 규칙 (매 세션 자동 로드)
 .claude/settings.json          권한 허용목록 — 리서치 때 승인 팝업 줄임
 scripts/check_post.py          퍼플앤트 HTML 셀프체크 자동화
 scripts/tts_count.py           푸로그 숏폼 대본 분량·형식 검사
+scripts/pm_sync.py             만든 콘텐츠 vs 블로그 RSS 대조 → PM/업로드_대조.md
+scripts/build_pm.py            PM/pm_data.json → PM/PM_보드.html
+PM/                            주간·월간 PM 보드 원본 (pm_data.json · sources.json · 템플릿)
 퍼플앤트 블로그/               HTML 포스팅 + 이미지/ + 포스팅_인덱스.md
 푸로그/                        4종 콘텐츠 + _푸로그_말투가이드.md + 콘텐츠_인덱스.md
 ```
@@ -52,3 +55,15 @@ python3 scripts/tts_count.py 대본.txt --target 35
 
 두 스크립트 모두 **기계가 셀 수 있는 항목만** 봄. 팩트 교차확인, 정비사업 단계 정확성, 프레이밍은
 여전히 스킬과 사람의 몫임.
+
+## 주간·월간 PM
+
+`PM/pm_data.json`이 이번 주·이번 달 할 일, 미업로드 재고, 발행 주기, 계기판의 유일한 원본임.
+클로드에게 「주간 PM 해줘」(매주 월) / 「월간 PM 해줘」(매월 1일)라고 하면 CLAUDE.md 절차대로 갱신·재발행함.
+
+맥에서 주 1회 (네이버 접속이 필요해서 클라우드 세션에서는 안 돌아감):
+
+```bash
+python3 scripts/pm_sync.py     # PM/sources.json의 local에 실제 작업 폴더를 먼저 추가할 것
+python3 scripts/build_pm.py
+```
