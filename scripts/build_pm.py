@@ -19,9 +19,10 @@ DATA = ROOT / "PM" / "pm_data.json"
 TEMPLATE = ROOT / "PM" / "board_template.html"
 OUT = ROOT / "PM" / "PM_보드.html"
 
-REQUIRED = ["updated", "next_pm", "principle", "hours", "week", "month", "gauges",
+REQUIRED = ["updated", "next_pm", "principle", "goal", "model", "samboo", "routes", "milestones",
+            "income", "trends", "stamina", "backlog", "hours", "week", "month", "gauges",
             "inventory_note", "inventory", "weekgrid", "cadence", "proposals", "axes",
-            "roadmap", "sources", "conflicts", "log"]
+            "sources", "conflicts", "log"]
 AXES = {"purpleant", "foorog", "career", "side", "asset", "health", "pm"}
 
 

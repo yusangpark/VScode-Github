@@ -1,4 +1,4 @@
-<title>유상 PM 보드</title>
+<title>자산증식 현황판</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -182,6 +182,63 @@ td.nw{white-space:nowrap}
 .notes ul{margin:0;padding-left:1.2em;font-size:13px;color:var(--ink-2)}
 .notes li{margin-bottom:4px}
 .foot{margin-top:40px;padding-top:16px;border-top:1.5px solid var(--ink);font-size:12.5px;color:var(--muted)}
+
+/* goal & calculator */
+.retro{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 16px;margin-bottom:16px}
+.retro ul{margin:6px 0 0;padding-left:1.2em;font-size:13.5px;color:var(--ink-2)}
+.calc{background:var(--surface);border:1px solid var(--line)}
+.presets{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line);background:var(--sunk)}
+.presets button{flex:1 1 auto;font:inherit;font-size:13px;font-weight:500;background:none;border:0;border-right:1px solid var(--line);color:var(--ink-2);padding:10px 12px;cursor:pointer}
+.presets button:last-child{border-right:0}
+.presets button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.chart{padding:14px 12px 4px;position:relative}
+.chart svg{display:block;width:100%;height:auto}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-family:var(--mono);font-size:11.5px;padding:4px 8px;border-radius:2px;opacity:0;transition:opacity .12s;white-space:nowrap}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 20px;padding:14px 16px;border-top:1px solid var(--line);align-items:end}
+.readout .big{font-family:var(--mono);font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--accent);line-height:1.2}
+.readout .big.need{color:var(--ink)}
+.verdict{font-size:13.5px;color:var(--ink-2)}
+.verdict b{color:var(--ink)}
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px 24px;padding:14px 16px 18px;border-top:1px solid var(--line)}
+.sld label{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.sld label span{font-family:var(--mono);color:var(--accent);font-weight:600;white-space:nowrap}
+.sld input{width:100%;accent-color:var(--accent)}
+.sld .hint{font-size:11.5px;color:var(--muted)}
+.fine{font-size:12px;color:var(--muted);margin-top:10px;max-width:80ch}
+.facts{margin:0;padding-left:1.1em;font-size:13.5px;color:var(--ink-2)}
+.facts li{margin-bottom:4px}
+.sbt{list-style:none;margin:0;padding:0;border-left:2px solid var(--line-2)}
+.sbt li{position:relative;padding:0 0 10px 16px;font-size:13.5px;display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px}
+.sbt li::before{content:"";position:absolute;left:-5px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ground);border:2px solid var(--line-2)}
+.sbt li.done::before{background:var(--a-purpleant);border-color:var(--a-purpleant)}
+.sbt li.last::before{border-color:var(--accent)}
+.sbt .w{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.routes{display:grid;gap:10px}
+.route{background:var(--surface);border:1px solid var(--line);padding:12px 14px}
+.route .rt{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.route .rid{font-family:var(--mono);font-weight:600;color:var(--accent)}
+.route h3{font-size:14.5px;font-weight:600}
+.route .rv{margin-left:auto}
+.route p{font-size:13px;color:var(--ink-2);margin-top:4px}
+.route .rm{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:4px}
+.route.main{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+tr.now td{background:var(--sunk)}
+tr.goal td{font-weight:600}
+.p-do{color:var(--ok)} .p-laterx{color:var(--accent)} .p-no{color:var(--muted)}
+tr.key td:nth-child(3){font-weight:600}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.rules div{background:var(--surface);padding:12px 14px}
+.rules b{display:block;font-size:14px;margin-bottom:4px}
+.rules span{font-size:13px;color:var(--ink-2)}
+.tg{margin-bottom:22px}
+.tg h3{font-size:16px;font-weight:600}
+.tgs{font-size:13px;color:var(--muted);margin:2px 0 10px}
+.tcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.tcard{background:var(--surface);border:1px solid var(--line);padding:12px 14px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.tch{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.tch b{font-size:14px;line-height:1.45}
+.tf{font-size:12.5px;color:var(--muted)}
+.tm{font-size:13px;color:var(--ink-2)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -189,28 +246,30 @@ td.nw{white-space:nowrap}
 
 <div class="wrap">
   <header class="mast">
-    <div class="lbl" id="h-eyebrow">PM 보드</div>
-    <h1 id="h-title">이번 주 할 일</h1>
+    <div class="lbl" id="h-eyebrow">자산증식 현황판</div>
+    <h1 id="h-title"></h1>
     <p class="theme" id="h-theme"></p>
     <p class="rule" id="h-rule"></p>
     <div class="stats">
+      <div class="stat"><div class="lbl">만 40까지</div><div class="v" id="st-dday"></div><div class="s">2034년 말 · 삼부 입성</div></div>
+      <div class="stat"><div class="lbl">순자산 지금 → 2034 계획</div><div class="v" id="st-nw"></div><div class="s" id="st-nw-s"></div></div>
       <div class="stat"><div class="lbl">이번 주</div><div class="v" id="st-week">0 / 0</div><div class="meter"><i id="mt-week"></i></div></div>
       <div class="stat"><div class="lbl">이번 달</div><div class="v" id="st-month">0 / 0</div><div class="meter"><i id="mt-month"></i></div></div>
-      <div class="stat"><div class="lbl">미업로드 · 확인 필요</div><div class="v" id="st-inv">0</div><div class="s" id="st-inv-s"></div></div>
-      <div class="stat"><div class="lbl">다음 주간 PM</div><div class="v" id="st-next" style="font-size:16px"></div><div class="s" id="st-next-s"></div></div>
-      <div class="stat"><div class="lbl">2030 관문까지</div><div class="v" id="st-2030"></div><div class="s">순금융자산 5억</div></div>
+      <div class="stat"><div class="lbl">안 올린 콘텐츠</div><div class="v" id="st-inv">0</div><div class="s" id="st-inv-s"></div></div>
     </div>
   </header>
 </div>
 
 <nav class="jump" aria-label="섹션 이동"><div class="in">
-  <a href="#week">이번 주</a><a href="#inventory">미업로드</a><a href="#cadence">발행 주기</a>
-  <a href="#ideas">만들 콘텐츠</a><a href="#gauges">계기판</a><a href="#axes">축별 성장</a><a href="#road">로드맵</a><a href="#ops">운영법</a>
+  <a href="#week">이번 주</a><a href="#goal">입성 계산기</a><a href="#samboo">삼부 루트</a><a href="#path">연도별</a>
+  <a href="#money">돈 버는 법</a><a href="#trend">트렌드</a><a href="#stamina">안 지치는 법</a><a href="#inventory">미업로드</a><a href="#cadence">발행 주기</a>
+  <a href="#ideas">만들 콘텐츠</a><a href="#gauges">계기판</a><a href="#axes">축별 성장</a><a href="#ops">운영법</a>
 </div></nav>
 
 <div class="wrap">
   <section id="week">
     <div class="sh"><h2>이번 주 · 이번 달</h2><span class="when" id="wk-range"></span></div>
+    <div class="retro" id="retro"><div class="lbl">지난 주기 회고</div><ul id="retro-list"></ul></div>
     <p class="deck">체크하면 저장되고, 다음 주간 PM 때 클로드가 이 체크 상태를 읽어서 회고함. 왼쪽 색 띠가 있는 3개가 이번 주 최소선.</p>
     <div class="two">
       <div>
@@ -220,6 +279,75 @@ td.nw{white-space:nowrap}
       <div class="list"><div class="list-h"><b id="mo-id">이번 달</b><span class="cnt" id="mo-cnt"></span></div><div id="mo-list"></div></div>
     </div>
     <p class="sync" id="sync">체크 상태 불러오는 중</p>
+  </section>
+
+  <section id="goal">
+    <div class="sh"><h2>입성 계산기 — 2034년에 어디 있나</h2></div>
+    <p class="deck" id="goal-honest"></p>
+    <div class="calc">
+      <div class="presets" id="presets" role="group" aria-label="시나리오"></div>
+      <div class="chart" id="chart" aria-label="연도별 순자산 예상"></div>
+      <div class="readout">
+        <div><div class="lbl">2034 순자산 예상</div><div class="big" id="r-nw"></div></div>
+        <div><div class="lbl">삼부 + 금융 10억에 필요한 순자산</div><div class="big need" id="r-need"></div></div>
+        <div class="verdict" id="r-verdict"></div>
+      </div>
+      <div class="sliders">
+        <div class="sld"><label for="s-gr">부동산 연 상승률 <span id="v-gr"></span></label><input type="range" id="s-gr" min="2" max="10" step="0.5"><div class="hint">지금 집(시트상 부동산 18억) 기준. 서울 상급지 장기 평균은 6~8% 안팎</div></div>
+        <div class="sld"><label for="s-gf">금융 연 수익률 <span id="v-gf"></span></label><input type="range" id="s-gf" min="2" max="12" step="0.5"><div class="hint">지수 적립 기준 6~8%. 이걸 올리는 것보다 넣는 돈을 늘리는 게 훨씬 큼</div></div>
+        <div class="sld"><label for="s-s27">2027년 부업 월수익 <span id="v-s27"></span></label><input type="range" id="s-s27" min="0" max="1000" step="50"><div class="hint">2027→2030 사이는 직선으로 늘어난다고 가정 · 80%를 금융자산으로</div></div>
+        <div class="sld"><label for="s-s30">2030년 이후 부업 월수익 <span id="v-s30"></span></label><input type="range" id="s-s30" min="0" max="4000" step="100"><div class="hint">퍼플앤트 ③ 리포트 + ④ 구독 + ⑤ 강의가 다 켜지면 월 1,500만 안팎</div></div>
+        <div class="sld"><label for="s-price">2034 삼부 신축 가격 <span id="v-price"></span></label><input type="range" id="s-price" min="25" max="55" step="1"><div class="hint">현재 권리가 추정 84㎡ 26.5억 · 구축 26평 시세 31.5억. 59㎡면 낮춰서 볼 것</div></div>
+        <div class="sld"><label for="s-loan">그때 받을 수 있는 주담대 <span id="v-loan"></span></label><input type="range" id="s-loan" min="0" max="15" step="1"><div class="hint">지금 규제: 25억 초과 주택 최대 2억. 규제가 풀리면 올려볼 것</div></div>
+      </div>
+    </div>
+    <p class="fine">계산: 시작값은 9/5 시트(부동산 18억 · 부채 8.68억 · 금융 1.64억). 매년 기본 저축 1,100만 + 원금상환 1,080만, 취득세 3.5% 반영. 양도세·종부세·인플레이션은 빠져 있음. 종목·단지 추천이 아니라 계획용 모델임.</p>
+  </section>
+
+  <section id="samboo">
+    <div class="sh"><h2>삼부 입성 루트</h2></div>
+    <p class="deck" id="sb-rule"></p>
+    <div class="two">
+      <div>
+        <div class="lbl" style="margin-bottom:8px">삼부 지금 상태</div>
+        <ul class="facts" id="sb-facts"></ul>
+        <div class="lbl" style="margin:18px 0 8px">사업 일정 (조합설립 이후는 추정)</div>
+        <ol class="sbt" id="sb-time"></ol>
+      </div>
+      <div class="routes" id="routes"></div>
+    </div>
+    <p class="fine" id="sb-src"></p>
+  </section>
+
+  <section id="path">
+    <div class="sh"><h2>연도별 — 계획선</h2></div>
+    <p class="deck">계산기의 '계획선'을 연도별로 펼친 것. 매년 12월 월간 PM에서 실제 순자산과 비교해서 위면 그대로, 아래면 부업 축을 손봄.</p>
+    <div class="tw"><table>
+      <thead><tr><th>연도</th><th>만 나이</th><th class="nw">순자산 계획</th><th class="nw">부업 월수익</th><th>그해의 한 가지</th></tr></thead>
+      <tbody id="ms-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="money">
+    <div class="sh"><h2>돈 버는 방법 — 유상이 할 수 있는 것 전부</h2></div>
+    <p class="deck">'지금'은 이미 하거나 바로 할 것, '나중'은 앞 칸이 열리면 할 것, '안 함'은 시간 대비 기대값이 낮아서 일부러 빼는 것.</p>
+    <div class="tw"><table>
+      <thead><tr><th>판정</th><th>축</th><th>방법</th><th class="nw">규모</th><th>열리는 조건</th><th>메모</th></tr></thead>
+      <tbody id="inc-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="trend">
+    <div class="sh"><h2>요즘 트렌드 조사</h2><span class="when" id="tr-asof"></span></div>
+    <p class="deck" id="tr-cav"></p>
+    <div id="tr-groups"></div>
+    <p class="fine" id="tr-src"></p>
+  </section>
+
+  <section id="stamina">
+    <div class="sh"><h2>안 지치고 8년 가는 법</h2></div>
+    <p class="deck">8년짜리 계획은 의지가 아니라 규칙으로 버팀. 지칠 때 할 일을 줄이는 기준을 미리 정해둠.</p>
+    <div class="rules" id="rules"></div>
   </section>
 
   <section id="inventory">
@@ -260,12 +388,6 @@ td.nw{white-space:nowrap}
     <div class="sh"><h2>축별 성장 — 어떻게 자산이 되나</h2></div>
     <p class="deck">사다리는 순서대로만 열림. 앞 칸이 뒷 칸의 재료라서 동시에 켜면 전부 죽음. 강조된 칸이 각 축의 최대 지렛대.</p>
     <div class="axes" id="axes-grid"></div>
-  </section>
-
-  <section id="road">
-    <div class="sh"><h2>2026 → 2050 로드맵</h2></div>
-    <p class="deck">구간마다 한 가지. 현금흐름(S2) 없이 갈아타기(S4)를 하면 대출에 목이 졸려 사업화를 못 함.</p>
-    <ul class="road" id="road-list"></ul>
   </section>
 
   <section id="ops">
@@ -311,17 +433,145 @@ td.nw{white-space:nowrap}
   function chip(axis){ var s=el('span','ax',AX[axis]||axis); s.dataset.axis=axis; return s; }
 
   /* header */
-  $('h-eyebrow').textContent = 'PM 보드 · ' + D.week.id + ' · ' + D.updated + ' 갱신';
-  $('h-title').textContent = D.week.range;
-  $('h-theme').textContent = D.week.theme;
+  var G = D.goal;
+  $('h-eyebrow').textContent = '자산증식 현황판 · ' + D.week.id + ' · ' + D.updated + ' 갱신';
+  $('h-title').textContent = G.title;
+  $('h-theme').textContent = G.home + ' + 금융 ' + G.financial + '억 = ' + G.target_networth + '억 · ' + G.plan_line;
   $('h-rule').textContent = D.principle;
-  $('wk-range').textContent = D.week.range + ' · ' + D.month.id;
+  $('wk-range').textContent = D.week.range + ' · ' + D.week.theme;
   $('wk-id').textContent = '이번 주 · ' + D.week.id;
   $('mo-id').textContent = '이번 달 · ' + D.month.id + ' — ' + D.month.theme;
-  $('st-next').textContent = D.next_pm.weekly;
-  $('st-next-s').textContent = '월간 ' + D.next_pm.monthly;
-  var days = Math.ceil((new Date(2030,11,31) - new Date(D.updated+'T00:00:00'))/86400000);
-  $('st-2030').textContent = days.toLocaleString('ko-KR') + '일';
+  var days = Math.ceil((new Date(G.deadline+'T00:00:00') - new Date(D.updated+'T00:00:00'))/86400000);
+  $('st-dday').textContent = days.toLocaleString('ko-KR') + '일';
+  var M = D.model, nw0 = M.start.re - M.start.debt + M.start.fin;
+  var ms34 = D.milestones.filter(function(m){return m.year===2034;})[0];
+  $('st-nw').textContent = nw0.toFixed(1) + ' → ' + ms34.nw + '억';
+  $('st-nw-s').textContent = '시작값 ' + M.start.asof + ' · 목표 ' + G.target_networth + '억';
+  (D.week.retro||[]).forEach(function(r){ $('retro-list').appendChild(el('li',null,r)); });
+  if(!(D.week.retro||[]).length) $('retro').hidden = true;
+
+  /* calculator */
+  $('goal-honest').textContent = G.honest;
+  var S = {gr:$('s-gr'), gf:$('s-gf'), s27:$('s-s27'), s30:$('s-s30'), price:$('s-price'), loan:$('s-loan')};
+  function manwon(v){ return v>=10000 ? (v/10000)+'억' : Number(v).toLocaleString('ko-KR')+'만'; }
+  function setPreset(pr){
+    S.gr.value=pr.gr; S.gf.value=pr.gf; S.s27.value=pr.s27; S.s30.value=pr.s30;
+    Array.prototype.forEach.call($('presets').children,function(b){ b.setAttribute('aria-pressed', String(b.dataset.id===pr.id)); });
+    calc();
+  }
+  M.presets.forEach(function(pr){
+    var b = el('button',null,pr.label); b.type='button'; b.dataset.id=pr.id;
+    b.addEventListener('click',function(){ setPreset(pr); });
+    $('presets').appendChild(b);
+  });
+  S.price.value = M.defaults.price; S.loan.value = M.defaults.loan;
+  function project(){
+    var gr=S.gr.value/100, gf=S.gf.value/100, s27=+S.s27.value, s30=+S.s30.value;
+    var R=M.start.re, Dt=M.start.debt, F=M.start.fin, pts=[{y:2026,v:R-Dt+F}];
+    for(var y=2027;y<=2034;y++){
+      var side = y>=2030 ? s30 : s27 + (s30-s27)*(y-2027)/3;
+      R*=1+gr; F=F*(1+gf)+(M.base_save_manwon+side*12*M.keep_ratio)/10000; Dt=Math.max(0,Dt-M.principal_manwon/10000);
+      pts.push({y:y,v:R-Dt+F});
+    }
+    return pts;
+  }
+  var NS='http://www.w3.org/2000/svg';
+  function svgEl(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  var tip = el('div','tip'); $('chart').appendChild(tip);
+  function draw(pts, need){
+    var old=$('chart').querySelector('svg'); if(old) old.remove();
+    var W=640,H=240,pl=40,pr=56,pt=14,pb=26, top=Math.max(60, Math.ceil(Math.max(need, pts[pts.length-1].v)/10)*10+5);
+    var x=function(y){return pl+(y-2026)/8*(W-pl-pr);}, yy=function(v){return H-pb-(v/top)*(H-pt-pb);};
+    var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'2026~2034 순자산 예상과 필요 순자산'});
+    for(var g=0; g<=top; g+=10){
+      svg.appendChild(svgEl('line',{x1:pl,x2:W-pr,y1:yy(g),y2:yy(g),stroke:'var(--line)','stroke-width':1}));
+      var t=svgEl('text',{x:pl-6,y:yy(g)+4,'text-anchor':'end','font-size':10,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'}); t.textContent=g+'억'; svg.appendChild(t);
+    }
+    [2026,2028,2030,2032,2034].forEach(function(y){ var t=svgEl('text',{x:x(y),y:H-8,'text-anchor':'middle','font-size':10,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'}); t.textContent=y; svg.appendChild(t); });
+    svg.appendChild(svgEl('line',{x1:pl,x2:W-pr,y1:yy(need),y2:yy(need),stroke:'var(--ink-2)','stroke-width':1.5,'stroke-dasharray':'5 4'}));
+    var nl=svgEl('text',{x:W-pr+4,y:yy(need)+4,'font-size':10.5,fill:'var(--ink-2)','font-family':'IBM Plex Sans KR, sans-serif'}); nl.textContent='필요 '+need.toFixed(0)+'억'; svg.appendChild(nl);
+    var d=pts.map(function(p,i){return (i?'L':'M')+x(p.y)+' '+yy(p.v);}).join(' ');
+    svg.appendChild(svgEl('path',{d:d+' L'+x(2034)+' '+yy(0)+' L'+x(2026)+' '+yy(0)+' Z',fill:'var(--accent)','fill-opacity':.08,stroke:'none'}));
+    svg.appendChild(svgEl('path',{d:d,fill:'none',stroke:'var(--accent)','stroke-width':2,'stroke-linejoin':'round'}));
+    pts.forEach(function(p,i){
+      var last=i===pts.length-1;
+      var c=svgEl('circle',{cx:x(p.y),cy:yy(p.v),r:last?5:4,fill:last?'var(--accent)':'var(--surface)',stroke:'var(--accent)','stroke-width':2});
+      var hit=svgEl('circle',{cx:x(p.y),cy:yy(p.v),r:12,fill:'transparent'});
+      hit.addEventListener('mouseenter',function(){ tip.textContent=p.y+' · 순자산 '+p.v.toFixed(1)+'억'; tip.style.opacity=1; var b=$('chart').getBoundingClientRect(), r=c.getBoundingClientRect(); tip.style.left=(r.left-b.left-30)+'px'; tip.style.top=(r.top-b.top-28)+'px'; });
+      hit.addEventListener('mouseleave',function(){ tip.style.opacity=0; });
+      svg.appendChild(c); svg.appendChild(hit);
+    });
+    var ll=svgEl('text',{x:x(2034)+8,y:yy(pts[pts.length-1].v)+4,'font-size':11,'font-weight':600,fill:'var(--accent)','font-family':'IBM Plex Mono, monospace'}); ll.textContent=pts[pts.length-1].v.toFixed(1)+'억'; svg.appendChild(ll);
+    $('chart').insertBefore(svg, tip);
+  }
+  function calc(){
+    $('v-gr').textContent=(+S.gr.value).toFixed(1)+'%'; $('v-gf').textContent=(+S.gf.value).toFixed(1)+'%';
+    $('v-s27').textContent='월 '+manwon(+S.s27.value); $('v-s30').textContent='월 '+manwon(+S.s30.value);
+    $('v-price').textContent=S.price.value+'억'; $('v-loan').textContent=S.loan.value+'억';
+    var pts=project(), nw=pts[pts.length-1].v, need=(+S.price.value)*(1+M.tax_rate)-(+S.loan.value)+G.financial;
+    $('r-nw').textContent=nw.toFixed(1)+'억'; $('r-need').textContent=need.toFixed(1)+'억';
+    var gap=nw-need, v=$('r-verdict'); v.textContent='';
+    var b=el('b',null, gap>=0 ? '2034년 입성 + 금융 10억 가능.' : (gap>-10 ? '2034년에 '+(-gap).toFixed(1)+'억 모자람.' : '2034년에 '+(-gap).toFixed(1)+'억 모자람 — 부업 축을 키워야 함.'));
+    v.appendChild(b);
+    v.appendChild(document.createTextNode(gap>=0 ? ' 남는 돈은 평형을 키우거나 금융자산으로.' : ' 59㎡로 먼저 들어가거나, 1~2년 늦추거나, 부업 월수익을 올리면 메워짐.'));
+    draw(pts, need);
+  }
+  Object.keys(S).forEach(function(k){ S[k].addEventListener('input',function(){ Array.prototype.forEach.call($('presets').children,function(b){b.setAttribute('aria-pressed','false');}); calc(); }); });
+  setPreset(M.presets.filter(function(p){return p.id==='plan';})[0]);
+
+  /* samboo */
+  var SB = D.samboo;
+  $('sb-rule').textContent = SB.rule;
+  SB.facts.forEach(function(f){ $('sb-facts').appendChild(el('li',null,f)); });
+  SB.timeline.forEach(function(t,i){ var li=el('li', t.done?'done':(i===SB.timeline.length-1?'last':'')); li.appendChild(el('span','w',t.when)); li.appendChild(el('span',null,t.what)); $('sb-time').appendChild(li); });
+  D.routes.forEach(function(r){
+    var c=el('article','route'+(r.id==='A'?' main':''));
+    var t=el('div','rt'); t.appendChild(el('span','rid',r.id)); t.appendChild(el('h3',null,r.name)); t.appendChild(el('span','pill rv '+(r.id==='A'?'p-ok':'p-check'),r.verdict)); c.appendChild(t);
+    c.appendChild(el('p',null,r.why)); c.appendChild(el('div','rm',r.when+' · 필요: '+r.need));
+    $('routes').appendChild(c);
+  });
+  var srcp=$('sb-src'); srcp.appendChild(document.createTextNode('출처: '));
+  SB.sources.forEach(function(s,i){ var a=el('a',null,s.name); a.href=s.url; a.target='_blank'; a.rel='noopener'; srcp.appendChild(a); if(i<SB.sources.length-1) srcp.appendChild(document.createTextNode(' · ')); });
+  srcp.appendChild(document.createTextNode(' — 사업 일정·가격은 추정이라 매 분기 다시 확인함.'));
+
+  /* milestones */
+  D.milestones.forEach(function(m){
+    var tr=el('tr', m.now?'now':(m.goal?'goal':''));
+    tr.appendChild(el('td','mono',String(m.year))); tr.appendChild(el('td','mono','만 '+(m.year-G.birth)));
+    tr.appendChild(el('td','mono nw',m.nw+'억')); tr.appendChild(el('td','nw',m.side)); tr.appendChild(el('td',null,m.key));
+    $('ms-body').appendChild(tr);
+  });
+
+  /* income */
+  var PICK={do:['p-do','지금'],later:['p-laterx','나중'],no:['p-no','안 함']};
+  D.income.forEach(function(r){
+    var tr=el('tr', r.key?'key':'');
+    var td0=el('td'); td0.appendChild(el('span','pill '+PICK[r.pick][0],PICK[r.pick][1])); tr.appendChild(td0);
+    var td1=el('td'); td1.appendChild(chip(r.axis)); tr.appendChild(td1);
+    tr.appendChild(el('td',null,r.name)); tr.appendChild(el('td','nw',r.size)); tr.appendChild(el('td',null,r.start)); tr.appendChild(el('td',null,r.note));
+    $('inc-body').appendChild(tr);
+  });
+
+  /* trends */
+  var T=D.trends;
+  $('tr-asof').textContent=T.asof; $('tr-cav').textContent=T.caveat;
+  T.groups.forEach(function(g){
+    var w=el('div','tg'); w.appendChild(el('h3',null,g.title)); w.appendChild(el('p','tgs',g.sub));
+    var grid=el('div','tcards');
+    g.items.forEach(function(it){
+      var c=el('article','tcard');
+      var h=el('div','tch'); h.appendChild(el('b',null,it.name)); h.appendChild(el('span','pill '+PICK[it.pick][0],PICK[it.pick][1])); c.appendChild(h);
+      c.appendChild(el('p','tf',it.fact));
+      var m=el('p','tm'); m.appendChild(el('span','lbl','유상 버전 ')); m.appendChild(document.createTextNode(it.mine)); c.appendChild(m);
+      grid.appendChild(c);
+    });
+    w.appendChild(grid); $('tr-groups').appendChild(w);
+  });
+  var tsrc=$('tr-src'); tsrc.appendChild(document.createTextNode('출처: '));
+  T.sources.forEach(function(s,i){ var a=el('a',null,s.name); a.href=s.url; a.target='_blank'; a.rel='noopener'; tsrc.appendChild(a); if(i<T.sources.length-1) tsrc.appendChild(document.createTextNode(' · ')); });
+
+  /* stamina */
+  D.stamina.forEach(function(r){ var d=el('div'); d.appendChild(el('b',null,r.rule)); d.appendChild(el('span',null,r.how)); $('rules').appendChild(d); });
 
   /* tasks */
   var boxes = [];
@@ -374,8 +624,9 @@ td.nw{white-space:nowrap}
     if(r.status==='none') nNone++; else if(r.status==='check') nCheck++;
     $('inv-body').appendChild(tr);
   });
-  $('st-inv').textContent = nNone + ' · ' + nCheck;
-  $('st-inv-s').textContent = '미업로드 '+nNone+'건 · 확인 필요 '+nCheck+'건';
+  var bl=D.backlog||{}; var blt=Object.keys(bl).reduce(function(a,k){return a+bl[k].n;},0);
+  $('st-inv').textContent = blt+'개';
+  $('st-inv-s').textContent = Object.keys(bl).map(function(k){return bl[k].label+' '+bl[k].n;}).join(' · ');
 
   /* cadence */
   D.weekgrid.forEach(function(d){
@@ -439,14 +690,6 @@ td.nw{white-space:nowrap}
     }
     var st = el('p','stop'); st.appendChild(el('b',null,'선')); st.appendChild(document.createTextNode(a.stop)); c.appendChild(st);
     $('axes-grid').appendChild(c);
-  });
-
-  /* roadmap */
-  D.roadmap.forEach(function(r){
-    var li = el('li', r.now?'now':(r.goal_mark?'goal':''));
-    li.appendChild(el('span','w',r.when));
-    var b = el('div'); b.appendChild(el('b',null,r.name)); b.appendChild(el('span',null,r.goal)); li.appendChild(b);
-    $('road-list').appendChild(li);
   });
 
   /* notes */

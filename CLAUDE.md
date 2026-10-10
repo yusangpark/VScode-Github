@@ -53,12 +53,18 @@ FAIL이 남은 채로 사용자에게 전달하지 말 것. WARN은 판단해서
 
 ## 자산증식 PM (주간·월간)
 
-퍼플앤트·푸로그·현업·사이드 프로젝트를 한 장으로 묶은 PM 보드를 이 레포에서 관리함.
+퍼플앤트·푸로그·현업·사이드 프로젝트를 한 장으로 묶은 자산증식 현황판(목표: 만 40=2034 여의도 삼부 입성 + 금융 10억)을 이 레포에서 관리함.
 보드: https://claude.ai/artifact/JAGL59ZiDat27rcUAaUAz3 (체크 상태는 보드의 db `checks` 컬렉션에 쌓임)
 
 - **원본은 `PM/pm_data.json` 하나.** HTML을 직접 고치지 말 것. JSON 수정 → `python3 scripts/build_pm.py` → `PM/PM_보드.html`을 같은 URL로 재발행.
 - **「주간 PM 해줘」(매주 월)**: ① `PM/업로드_대조.md`가 이번 주 것이면 읽고 inventory 반영(없으면 맥에서 `python3 scripts/pm_sync.py` 돌려달라고 요청) ② ArtifactData로 `checks` 읽어서 지난주 회고 3줄 ③ 안 된 일은 이월 또는 삭제, `week`를 새 id(`2026-W41`, 할 일 id `w41-N`)로 8개 이하 재작성 ④ `log`에 한 줄 ⑤ 빌드·재발행·커밋.
-- **「월간 PM 해줘」(매월 1일)**: 사용자에게 자산 시트 숫자 3개(순자산·순금융자산·부업 현금수익)와 채널 숫자를 받아 `gauges` 갱신 → 궤도 판정 → `month`(id `m11-N`) 12개 이하 재작성 → `cadence`·`hours` 조정.
-- 최상위 기준은 2040 입성 플랜(9/27). 로드맵끼리 충돌하면 최신 문서를 따르고 `conflicts`에 한 줄 남김.
+- **「월간 PM 해줘」(매월 1일)** — 사용자에게 숫자를 묻기 전에 직접 확인함:
+  1. 자산 시트(구글 스프레드시트) — Google Drive 커넥터로 읽음. 커넥터가 없으면 claude.ai/customize/connectors 연결을 안내하고 숫자 3개(순자산·순금융자산·부업 현금수익)만 받음
+  2. 퍼플앤트 현황판 https://claude.ai/artifact/K5WR4gWEfJ5eqgHFa2NTCM — 대기 글 수·인스타 팔로워·단계 체크
+  3. 푸로그 유니버스 작전판 https://claude.ai/artifact/WUcLmfXSppjesvSgf1eHxr — 일방문·대기 세트·로컬 비율·로드맵 체크
+  4. 확인된 완료 항목은 ArtifactData로 보드 `checks`에 직접 씀(`by: "claude"`, `why`에 근거)
+  5. `gauges`·`backlog`·`inventory`·`model.start` 갱신 → 입성 계산기 궤도 판정 → `month`(id `m11-N`) 12개 이하 재작성
+- 최상위 기준은 이 현황판의 `goal`(2026-10-10 교체). 로드맵끼리 충돌하면 최신 문서를 따르고 `conflicts`에 한 줄 남김.
+- 카페는 민정이 2027년에 하는 일이고 유상은 돕는 역할. Claude 교본은 개인 참고용.
 - 보드는 개인용이라 음슴체로 씀. 블로그 글 말투 규칙(위 두 축)과는 별개임.
 - 현업 항목은 사내 자료를 절대 담지 않음. 할 일 이름 수준까지만.

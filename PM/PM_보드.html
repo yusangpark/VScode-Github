@@ -1,4 +1,4 @@
-<title>유상 PM 보드</title>
+<title>자산증식 현황판</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -182,35 +182,94 @@ td.nw{white-space:nowrap}
 .notes ul{margin:0;padding-left:1.2em;font-size:13px;color:var(--ink-2)}
 .notes li{margin-bottom:4px}
 .foot{margin-top:40px;padding-top:16px;border-top:1.5px solid var(--ink);font-size:12.5px;color:var(--muted)}
+
+/* goal & calculator */
+.retro{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 16px;margin-bottom:16px}
+.retro ul{margin:6px 0 0;padding-left:1.2em;font-size:13.5px;color:var(--ink-2)}
+.calc{background:var(--surface);border:1px solid var(--line)}
+.presets{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line);background:var(--sunk)}
+.presets button{flex:1 1 auto;font:inherit;font-size:13px;font-weight:500;background:none;border:0;border-right:1px solid var(--line);color:var(--ink-2);padding:10px 12px;cursor:pointer}
+.presets button:last-child{border-right:0}
+.presets button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.chart{padding:14px 12px 4px;position:relative}
+.chart svg{display:block;width:100%;height:auto}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-family:var(--mono);font-size:11.5px;padding:4px 8px;border-radius:2px;opacity:0;transition:opacity .12s;white-space:nowrap}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 20px;padding:14px 16px;border-top:1px solid var(--line);align-items:end}
+.readout .big{font-family:var(--mono);font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--accent);line-height:1.2}
+.readout .big.need{color:var(--ink)}
+.verdict{font-size:13.5px;color:var(--ink-2)}
+.verdict b{color:var(--ink)}
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px 24px;padding:14px 16px 18px;border-top:1px solid var(--line)}
+.sld label{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.sld label span{font-family:var(--mono);color:var(--accent);font-weight:600;white-space:nowrap}
+.sld input{width:100%;accent-color:var(--accent)}
+.sld .hint{font-size:11.5px;color:var(--muted)}
+.fine{font-size:12px;color:var(--muted);margin-top:10px;max-width:80ch}
+.facts{margin:0;padding-left:1.1em;font-size:13.5px;color:var(--ink-2)}
+.facts li{margin-bottom:4px}
+.sbt{list-style:none;margin:0;padding:0;border-left:2px solid var(--line-2)}
+.sbt li{position:relative;padding:0 0 10px 16px;font-size:13.5px;display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px}
+.sbt li::before{content:"";position:absolute;left:-5px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ground);border:2px solid var(--line-2)}
+.sbt li.done::before{background:var(--a-purpleant);border-color:var(--a-purpleant)}
+.sbt li.last::before{border-color:var(--accent)}
+.sbt .w{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.routes{display:grid;gap:10px}
+.route{background:var(--surface);border:1px solid var(--line);padding:12px 14px}
+.route .rt{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.route .rid{font-family:var(--mono);font-weight:600;color:var(--accent)}
+.route h3{font-size:14.5px;font-weight:600}
+.route .rv{margin-left:auto}
+.route p{font-size:13px;color:var(--ink-2);margin-top:4px}
+.route .rm{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:4px}
+.route.main{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+tr.now td{background:var(--sunk)}
+tr.goal td{font-weight:600}
+.p-do{color:var(--ok)} .p-laterx{color:var(--accent)} .p-no{color:var(--muted)}
+tr.key td:nth-child(3){font-weight:600}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.rules div{background:var(--surface);padding:12px 14px}
+.rules b{display:block;font-size:14px;margin-bottom:4px}
+.rules span{font-size:13px;color:var(--ink-2)}
+.tg{margin-bottom:22px}
+.tg h3{font-size:16px;font-weight:600}
+.tgs{font-size:13px;color:var(--muted);margin:2px 0 10px}
+.tcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.tcard{background:var(--surface);border:1px solid var(--line);padding:12px 14px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.tch{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.tch b{font-size:14px;line-height:1.45}
+.tf{font-size:12.5px;color:var(--muted)}
+.tm{font-size:13px;color:var(--ink-2)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
-<script id="pm-data" type="application/json">{"updated": "2026-09-28", "next_pm": {"weekly": "2026-10-05 (월)", "monthly": "2026-11-01"}, "principle": "8개가 동시에 걸려 있어서 멈춘 것임. 매주 할 일은 8개 이하, 축마다 다음 한 수만.", "hours": [{"axis": "purpleant", "label": "퍼플앤트", "h": 5, "note": "블로그 2h + 인스타 3h · 2030 엔진 본체"}, {"axis": "foorog", "label": "푸로그", "h": 2.5, "note": "4종 콘텐츠 1세트/주 · 생활비 방어"}, {"axis": "career", "label": "현업", "h": 1.5, "note": "퇴근 후는 읽고 → 내 도면 대조만"}, {"axis": "side", "label": "사이드 개발", "h": 1, "note": "새 기능 동결 · 콘텐츠로 뽑아쓰기만"}], "week": {"id": "2026-W40", "range": "9/28 월 — 10/4 일", "theme": "재점화 — 멈춘 것 다시 켜고, 날아갈 것부터 지키기", "tasks": [{"id": "w40-1", "axis": "side", "must": true, "text": "갈아타기 대시보드 미커밋 51건 커밋 + 백업", "note": "날아가면 복구 불가. 30분이면 끝남 — 이번 주 1순위"}, {"id": "w40-2", "axis": "purpleant", "must": true, "text": "퍼플앤트 블로그 1편 재개 (9/18 이후 0편)", "note": "「퍼플앤트 블로그 써줘」→ 인덱스와 겹치지 않는 핫이슈 1개. 발행 후 포스팅_인덱스.md 한 줄"}, {"id": "w40-3", "axis": "foorog", "must": true, "text": "푸로그 화요일 블로그 1편 + 토요일 서남권 1곳 촬영", "note": "바쁜 주 최소선. 제목 앞 15자에 지역 키워드(신풍역·영등포·보라매)"}, {"id": "w40-4", "axis": "asset", "text": "10/1 계기판 — 자산 시트 9월 마감 기록", "note": "9/5 이후 미기록. 순자산·순금융자산·부업 현금수익 3개만 적어서 다음 PM 때 알려주기"}, {"id": "w40-5", "axis": "purpleant", "text": "퍼비 표정 6종 스케치 착수 (주말)", "note": "놀람·단호·설명·지침·계산·흡족 / 128px 식별성. 10월 인스타 개설의 전제"}, {"id": "w40-6", "axis": "career", "text": "실수 로그 파일 만들고 첫 줄 + 올해 진급 평가 항목 확인", "note": "외장설계 로드맵 10월 1주 과제. 4주 뒤 체크리스트 20줄로 승격"}, {"id": "w40-7", "axis": "health", "text": "월요일 아침 체중 + 운동 기록 재개", "note": "9/15부터 공란. 72kg → 12/31 68kg"}, {"id": "w40-8", "axis": "pm", "text": "맥에서 pm_sync.py 첫 실행 → 미업로드 대조표 확정", "note": "python3 scripts/pm_sync.py — 블로그 2개 RSS와 로컬 폴더를 대조함. PM/sources.json에 로컬 경로 먼저 채울 것"}]}, "month": {"id": "2026-10", "theme": "엔진 켜기 — 인스타 장치 깔고, 두 블로그 리듬 고정", "tasks": [{"id": "m10-1", "axis": "purpleant", "text": "리드마그넷 「정비사업 9단계 한 장 정리표」 PDF", "note": "10월 최우선. 이거 없이 인스타 시작하면 데려온 사람이 그냥 지나감"}, {"id": "m10-2", "axis": "purpleant", "text": "캐러셀 엔진 v2 (10장) + 블로그→캐러셀 변환기", "note": "클로드 담당. 주 5시간 예산을 지키는 전제"}, {"id": "m10-3", "axis": "purpleant", "text": "인스타 @purpleant.zip 개설 + 프로필·하이라이트 4개", "note": "순서 엄수: 계정 → 리드마그넷 → 프로필 → 첫 게시물(11월)"}, {"id": "m10-4", "axis": "purpleant", "text": "블로그 아카이브 30개 → 캐러셀 소재화", "note": "11월 발행분 12개는 사전형(에버그린)으로"}, {"id": "m10-5", "axis": "purpleant", "text": "퍼플앤트 블로그 월 4편 (주 1 · 수요일)", "note": "주제는 목표 3권역 워치리스트에서 우선 — 리서치와 발행을 한 번에"}, {"id": "m10-6", "axis": "foorog", "text": "푸로그 지난 글 제목 갈아엎기 (하루 5개)", "note": "키워드 먼저 정하고 쓰기로 전환. 검색광고 키워드도구로 월 500~3,000회 롱테일"}, {"id": "m10-7", "axis": "foorog", "text": "필러 글 1호 「영등포 맛집 총정리」", "note": "새 취재 없이 기존 글 링크로. 오래 사는 검색 자산"}, {"id": "m10-8", "axis": "foorog", "text": "체험단 거르는 기준 적용 — 시급 2만원 미만 거절", "note": "받는 금액 ÷ (방문+작성 시간). 같은 50~70만을 더 적은 시간으로"}, {"id": "m10-9", "axis": "career", "text": "Malloy 두께·수축 장 + 내 부품 두께 지도 1장 · 승인 소재 5종 비교표", "note": "퇴근 후 주 1.5h 안에서만"}, {"id": "m10-10", "axis": "asset", "text": "9월에서 넘어온 숫자 3개: 현금흐름 재측정 · DSR/대출한도 조회 · 6월 신규대출 1.17억 손익", "note": "이게 틀리면 2030 관문 계산이 전부 틀림"}, {"id": "m10-11", "axis": "asset", "text": "사업자등록 알아보기 (간이과세·온라인)", "note": "유료 리포트·구독 수익축의 전제. 미리 알아만 둠"}, {"id": "m10-12", "axis": "side", "text": "대시보드: 목표 3권역 워치리스트 태깅만", "note": "여의도·이촌·한남·반포·방배. 새 기능은 11월 시뮬레이터 전까지 동결"}]}, "gauges": [{"name": "순자산", "now": "10.96억", "asof": "9/5", "target": "11.2억", "by": "12월", "state": "stale"}, {"name": "순금융자산 (대출 제외)", "now": "0.47억", "asof": "9/5", "target": "0.55억", "by": "12월", "state": "stale"}, {"name": "부업 현금 월수익", "now": "0원", "asof": "9월", "target": "월 30만", "by": "12월", "state": "behind", "hint": "푸로그 체험단 50~70만은 현물이라 제외"}, {"name": "퍼플앤트 블로그 발행", "now": "9월 5편", "asof": "9/27", "target": "월 4편", "by": "매월", "state": "ok", "hint": "누적 32편 · 9/18 이후 멈춤"}, {"name": "퍼플앤트 인스타", "now": "미개설", "asof": "9/27", "target": "팔로워 500 · 저장률 3%", "by": "12월", "state": "behind"}, {"name": "푸로그 블로그 일방문", "now": "150", "asof": "9/7", "target": "300", "by": "12월", "state": "behind"}, {"name": "체중", "now": "72kg", "asof": "9월", "target": "68kg", "by": "12/31", "state": "stale"}], "inventory_note": "아래는 지금까지 만든 계획·산출물 중 채널에 아직 안 올라간 것. 블로그 글 단위 대조는 맥에서 pm_sync.py를 돌려야 확정됨 — 클라우드 세션에서는 네이버 접속과 맥 폴더 조회가 막혀 있음.", "inventory": [{"axis": "purpleant", "item": "블로그 아카이브 32편 → 인스타 캐러셀", "made": "블로그 32편 구조화 완료", "channel": "인스타", "status": "none", "action": "계정 개설 후 11월부터 주 3개. 한 편이 캐러셀 2~3개로 쪼개짐"}, {"axis": "purpleant", "item": "훅 템플릿 12개 (인스타 런치 플랜)", "made": "8/30 작성", "channel": "인스타", "status": "none", "action": "첫 4주 커버 문구로 그대로 사용"}, {"axis": "purpleant", "item": "작성 중이던 블로그 초안", "made": "9/18 이후", "channel": "네이버 블로그", "status": "check", "action": "맥 퍼플앤트 폴더에 발행 안 된 HTML이 있는지 pm_sync로 확인"}, {"axis": "side", "item": "3D 여의도(아스트라) 결과 화면", "made": "렌더 결과 있음", "channel": "인스타", "status": "none", "action": "사이트 완성 전에 「10년 뒤 여의도」 캐러셀 1개로 반응 테스트"}, {"axis": "side", "item": "갈아타기 대시보드 214단지 · 12축 점수", "made": "완성 · 로컬", "channel": "인스타·블로그", "status": "none", "action": "인스타 30일차에 「한강변 재건축 점수 TOP10」 카드로"}, {"axis": "foorog", "item": "4종 콘텐츠 팩 39개 (9/7 기준)", "made": "블로그·숏폼·릴스·시리즈 세트", "channel": "블로그·유튜브·인스타", "status": "check", "action": "팩마다 3채널 중 어디까지 올라갔는지 pm_sync로 대조"}, {"axis": "foorog", "item": "쇼핑커넥트 링크", "made": "가입 완료", "channel": "네이버 블로그", "status": "none", "action": "다음 글부터 실제 삽입. 가입만으론 0원"}, {"axis": "foorog", "item": "유튜브 재생목록 5개 (시리즈 분류)", "made": "9/7 작전판 계획", "channel": "유튜브", "status": "check", "action": "영상 82개 분류 여부 확인"}, {"axis": "foorog", "item": "창업일기 1화", "made": "9/7 작전판 계획", "channel": "유튜브·인스타", "status": "check", "action": "카페 준비가 지금도 진행 중이면 1화부터. 보류면 이 줄 삭제"}, {"axis": "career", "item": "외장설계 Claude 교본 (Rev.1)", "made": "9/19 완성", "channel": "사내 공유", "status": "check", "action": "사내 발표·공유 여부 확인. 진급 카드라 공유 기록을 남길 것 (외부 채널 금지)"}], "cadence": [{"axis": "purpleant", "channel": "네이버 블로그", "rhythm": "주 1편 · 수", "per_month": 4, "why": "인스타 전까지 유일한 발행축. 애드포스트(수익 ①)와 인스타 소재의 원천", "status": "restart"}, {"axis": "purpleant", "channel": "인스타 캐러셀", "rhythm": "주 3개 · 월·수·금", "per_month": 12, "why": "11월 첫 게시물부터. 처음 30일은 사전형 60%", "status": "planned", "start": "2026-11"}, {"axis": "purpleant", "channel": "인스타 릴스", "rhythm": "주 1개", "per_month": 4, "why": "60일차부터, 캐러셀 슬라이드 재활용으로만", "status": "later", "start": "2027-01"}, {"axis": "foorog", "channel": "네이버 블로그", "rhythm": "주 1편 · 화 (여유 있으면 토 +1)", "per_month": 4, "why": "키워드 먼저. 로컬 7 : 핫플 3", "status": "live"}, {"axis": "foorog", "channel": "유튜브 숏폼 · 인스타 릴스", "rhythm": "주 2개 · 목·토", "per_month": 8, "why": "같은 방문의 4종 콘텐츠에서 나옴. 마지막 2초 「가격·웨이팅은 블로그에」", "status": "live"}, {"axis": "career", "channel": "사내 (비공개)", "rhythm": "분기 산출물 1개", "per_month": 0, "why": "체크리스트 → DR 체크리스트 → 사내 발표. 진급 평가 카드", "status": "live"}, {"axis": "asset", "channel": "자산 시트", "rhythm": "매월 1일 30분", "per_month": 1, "why": "계기판 5개 갱신 → 궤도 판정", "status": "restart"}], "weekgrid": [{"day": "월", "items": [{"axis": "purpleant", "t": "인스타 캐러셀 (11월~)"}, {"axis": "pm", "t": "주간 PM 10분"}]}, {"day": "화", "items": [{"axis": "foorog", "t": "블로그 1편"}]}, {"day": "수", "items": [{"axis": "purpleant", "t": "블로그 1편"}, {"axis": "purpleant", "t": "인스타 캐러셀 (11월~)"}]}, {"day": "목", "items": [{"axis": "foorog", "t": "숏폼 + 릴스"}]}, {"day": "금", "items": [{"axis": "purpleant", "t": "인스타 캐러셀 (11월~)"}]}, {"day": "토", "items": [{"axis": "foorog", "t": "촬영 1~2곳 + 숏폼"}, {"axis": "purpleant", "t": "퍼비 커버 3컷"}]}, {"day": "일", "items": [{"axis": "foorog", "t": "방문 메모 → 4종 초안"}, {"axis": "career", "t": "읽기 30분 · 도면 대조 60분"}]}], "proposals": [{"axis": "purpleant", "when": "10월 매주", "title": "목표 3권역 단지 단계 점검 (여의도 우선)", "format": "블로그", "why": "입성 1순위 권역을 콘텐츠로 파면 내 투자 리서치와 발행이 한 번에 됨. 스킬 1단계에서 인덱스와 겹치는지 확인 후"}, {"axis": "purpleant", "when": "11월 1~4주", "title": "1분 정비사업 사전 12편 — 관리처분·비례율·통합심의·사업시행인가·조합설립·안전진단 등", "format": "인스타 캐러셀", "why": "첫 30일은 저장되는 에버그린. 블로그 용어 풀이를 그대로 재포장"}, {"axis": "purpleant", "when": "11월", "title": "「정비사업 9단계, 우리 동네는 몇 번임?」", "format": "캐러셀 + 리드마그넷 CTA", "why": "댓글 키워드 '단계' → PDF 발송. 퍼널 첫 가동"}, {"axis": "side", "when": "12월", "title": "「한강변 재건축 점수 TOP10」", "format": "캐러셀", "why": "대시보드 데이터로만 만들 수 있는 콘텐츠. 남들이 못 따라함"}, {"axis": "side", "when": "12월", "title": "「10년 뒤 여의도」 3D 렌더", "format": "캐러셀 1개 테스트", "why": "반응 오면 그때 사이트. 안 오면 동결 유지"}, {"axis": "foorog", "when": "10월 매주", "title": "신길·영등포 밥집 도장깨기 #1~", "format": "4종 콘텐츠", "why": "홈 구역 검색 1페이지 선점. 번호가 붙어야 구독이 생김"}, {"axis": "foorog", "when": "10~11월", "title": "필러 글 3개 — 영등포 맛집 총정리 · 여의도 점심 1만원대 · 신풍·보라매 브런치", "format": "블로그 허브 글", "why": "기존 글 링크로 만듦. 세 번째는 카페 상권조사를 겸함"}, {"axis": "foorog", "when": "월 2회", "title": "밍이랑 주말 코스 (밥 → 카페 → 산책)", "format": "블로그 코스글 + 숏폼 3개", "why": "촬영 1번에 콘텐츠 5개"}], "axes": [{"id": "purpleant", "name": "퍼플앤트", "role": "2030 엔진 본체 · 경제·주식·부동산", "now": "블로그 누적 32편, 9/18 이후 멈춤 · 인스타 미개설", "next": "블로그 재개 1편 + 퍼비 6종 + 9단계 PDF", "ladder": [{"step": "① 블로그 애드포스트", "gate": "지금", "size": "월 5~30만"}, {"step": "② 인스타 협업·광고", "gate": "팔로워 3,000 + 저장률 3%", "size": "월 200~400만"}, {"step": "③ 유료 리포트 (월간 구역 현황)", "gate": "DM 리스트 1,000명", "size": "월 300만"}, {"step": "④ 갈아타기 대시보드 구독", "gate": "팔로워 1만 + 무료판 검증", "size": "월 1,000만", "key": true}, {"step": "⑤ 강의·전자책", "gate": "아카이브 100편", "size": "연 3,600만"}, {"step": "⑥ 컨설팅·임장", "gate": "④⑤ 검증 후", "size": "월 300~500만"}], "phases": [{"when": "10월", "name": "Phase 0 · 장치만 깖", "goal": "발행 0. 퍼비 6종 · 엔진 v2 · 9단계 PDF · 계정·프로필", "now": true}, {"when": "11월", "name": "Phase 1 · 저장되는 글 찾기", "goal": "주 3 · 사전형 60% · 500명 · 저장률 3%"}, {"when": "12월", "name": "Phase 2 · 퍼널 켜기", "goal": "댓글 키워드 자동 DM · 릴스 시작 · 1,500명"}, {"when": "2027.01", "name": "Phase 3 · 돈이 되는지", "goal": "3,000명 · 협업 1건 · 유료 리포트 실험"}], "stop": "인스타 12개월에 3,000 못 넘으면 → 블로그 + 대시보드 구독으로 재편"}, {"id": "foorog", "name": "푸로그", "role": "생활비 방어 · 카페 홍보 자산", "now": "블로그 일방문 150 · 유튜브 45 · 인스타 387 (9/7) · 체험단 월 50~70만(현물)", "next": "키워드 먼저 쓰기 + 서남권 로컬 7:3", "ladder": [{"step": "체험단 (식비 절감)", "gate": "지금 · 시급 2만 기준", "size": "월 50~70만 현물"}, {"step": "애드포스트 + 쇼핑커넥트", "gate": "일방문 1,000", "size": "월 13~30만"}, {"step": "지역 매장 직접 협찬", "gate": "제안서 + 실적", "size": "건당 5~20만"}, {"step": "원고료(현금) 협찬 전환", "gate": "일방문 500", "size": "건당 현금"}, {"step": "동네 가게 콘텐츠 대행", "gate": "카페 오픈 사례", "size": "월 30~100만", "key": true}], "phases": [{"when": "09~11월", "name": "토대", "goal": "그물 치기 · 좌표 좁히기 · 일방문 300", "now": true}, {"when": "12~02월", "name": "결정", "goal": "롱폼 시작 · 첫 유료 협찬 · 일방문 400"}, {"when": "03~05월", "name": "오픈", "goal": "카페 연계 · 일방문 500~600"}, {"when": "06~09월", "name": "수확", "goal": "일방문 1,000 · 부수익 월 50~100만"}], "stop": "채널을 늘리지 않음. 새 채널 제안은 전부 보류"}, {"id": "career", "name": "현업 · 외장설계", "role": "월급 바닥 · 진급", "now": "Q4 진급 시즌 · 약점 = 디테일 누락 · Claude 교본 Rev.1 완성", "next": "실수 로그 → 12월 체크리스트 v1 (20줄)", "ladder": [{"step": "Stage 1 · 사고 안 내는 설계자", "gate": "2026 Q4 — 2027 Q2", "size": "P1 6개 주제"}, {"step": "Stage 2 · 이유를 설명하는 설계자", "gate": "2027 Q3 — 2028", "size": "사내 발표 1회"}, {"step": "Stage 3 · 시스템을 보는 설계자", "gate": "2029 —", "size": "특허·발표 1건"}], "phases": [{"when": "10월", "name": "두께·싱크·수축", "goal": "두께 지도 1장 · 소재 5종 비교표", "now": true}, {"when": "11월", "name": "리브·보스·도그하우스 · 스냅핏", "goal": "싱크 사례 원인표 · 훅 1개 역산 · 현장 1회"}, {"when": "12월", "name": "체크리스트 v1", "goal": "도면 제출 전 5분 통과 · 2027 금형센터 교육 신청"}], "stop": "사내 자료는 개인 Claude·블로그에 절대 넣지 않음"}, {"id": "side", "name": "사이드 프로젝트", "role": "도구 → 콘텐츠 원재료", "now": "갈아타기 대시보드 214단지 · 3D 여의도 · 주식 대시보드 · 자동매매(동결)", "next": "미커밋 51건 지키기 → 워치리스트 태깅", "ladder": [{"step": "0 · 지키기", "gate": "이번 주", "size": "커밋·백업"}, {"step": "1 · 나를 위한 기능", "gate": "11월", "size": "워치리스트 · 갈아타기 시뮬레이터"}, {"step": "2 · 콘텐츠 엔진화", "gate": "인스타 30일차", "size": "카드 자동 생성", "key": true}, {"step": "3 · 무료 공개판", "gate": "팔로워 1,000+", "size": "리드마그넷"}, {"step": "4 · SaaS", "gate": "팔로워 3,000+", "size": "구독 (퍼플앤트 ④)"}], "phases": [], "stop": "새 기능 동결. 청중 먼저, 도구는 그다음"}], "roadmap": [{"when": "2026 Q4", "name": "S1 · 재점화", "goal": "인스타 런칭 + 전선 줄이기 · 주 3 발행 · 팔로워 500 · 체중 68kg", "now": true}, {"when": "2027~28", "name": "S2 · 현금흐름", "goal": "부업 월 350만 3개월 연속 · 금융자산 2.6억"}, {"when": "2029~30", "name": "S3 · 2030 관문", "goal": "부업 월 700만 · 순금융자산 5억"}, {"when": "2031~34", "name": "S4 · 1차 갈아타기", "goal": "한강·탄천 접근 자산으로 이동 · 퍼플앤트 연 2억"}, {"when": "2035~40", "name": "S5 · 입성", "goal": "여의도 / 이촌·한남 / 반포·방배 실거주", "goal_mark": true}, {"when": "2041~50", "name": "S6 · 건물", "goal": "총자산 200억 (건물 100 · 아파트 50+ · 금융 50)"}], "sources": [{"name": "2040 입성 플랜", "url": "https://claude.ai/artifact/D7MtWmmLWAW6zP6euNbgqH", "date": "9/27", "role": "최상위 기준 (이 보드의 로드맵·시간 배분 출처)"}, {"name": "한강으로 가는 14년", "url": "https://claude.ai/artifact/WhS82u2KBRncGtYTbSAxxy", "date": "9/6", "role": "이전판. 1차 갈아타기 2029→2031~33으로 바뀜. 계산기만 참고"}, {"name": "퍼플앤트 작전판", "url": "https://claude.ai/artifact/GfLcZrnjG3yhXgyhhwzw1z", "date": "9/6", "role": "인스타 Phase 0~3 원본"}, {"name": "퍼플앤트 인스타 런치 플랜", "url": "https://claude.ai/artifact/MrEL6mQUqM2RGB4huCmF4r", "date": "8/30", "role": "훅·슬라이드·퍼널 설계"}, {"name": "푸로그 유니버스 작전판", "url": "https://claude.ai/artifact/WUcLmfXSppjesvSgf1eHxr", "date": "9/7", "role": "로컬 전략·시리즈·카페 타임라인 원본"}, {"name": "외장설계 역량 로드맵", "url": "https://claude.ai/artifact/QGy7MTDK8N1wPc8QDE6W6e", "date": "9/28", "role": "현업 주제 카드·자료"}, {"name": "유상의 프로젝트 재편안", "url": "https://claude.ai/artifact/9LK6Yp59Mq4UDed18iBGFn", "date": "9/13", "role": "5개 프로젝트 구조"}], "conflicts": ["푸로그 시간: 작전판(9/7)은 주 5~7h, 2040 플랜(9/27)은 주 2.5h → 최신 기준 2.5h. 루틴을 '토 촬영 + 화 블로그'로 줄임", "1차 갈아타기: 14년 플랜은 2029~31, 2040 플랜은 2031~33 → 2030 금융자산 5억이 먼저라 2031~33 채택", "퍼플앤트 블로그 편수: 작전판 38편 / 2040 플랜 32편 → 다음 pm_sync 결과로 확정"], "log": [{"date": "2026-09-28", "text": "PM 보드 신설. 로드맵 7개를 통합하고 W40·10월 할 일을 뽑음. 블로그 업로드 대조는 맥에서 첫 pm_sync 실행 후 확정 예정"}]}</script>
+<script id="pm-data" type="application/json">{"updated": "2026-10-10", "next_pm": {"weekly": "2026-10-12 (월)", "monthly": "2026-11-01"}, "principle": "목표는 크게, 매주 할 일은 작게. 주 10시간 안에서 최소선 3개만 지키면 실패가 아님.", "goal": {"title": "만 40세(2034), 여의도 삼부 입성", "birth": 1994, "deadline": "2034-12-31", "target_networth": 50, "home": "여의도 삼부아파트 신축 실거주", "home_price_2034": 40, "financial": 10, "plan_line": "계획선: 2034 순자산 40억 + 삼부 입성 → 2036 50억 완성", "honest": "삼부 84㎡(2034 시세 약 40억 가정)를 지금 대출 규제(25억 초과 주택 주담대 최대 2억)로 사고 금융 10억까지 남기려면 2034년 순자산이 약 49억이어야 함. 지금 11억에서 8년에 4.5배. 부업이 2030년부터 월 1,500만 나와도 2034년 약 38억이고, 2034년에 50억을 맞추려면 월 3,000만이 필요함. 그래서 계획선은 '2034 입성 + 2036 50억'으로 두고, 2034 50억은 도전선으로 둠."}, "model": {"start": {"re": 18.0, "debt": 8.68, "fin": 1.64, "asof": "2026-09-05 시트"}, "base_save_manwon": 1100, "principal_manwon": 1080, "keep_ratio": 0.8, "tax_rate": 0.035, "presets": [{"id": "now", "label": "현행 유지", "gr": 6, "gf": 7, "s27": 0, "s30": 0}, {"id": "plan", "label": "계획선", "gr": 7, "gf": 7, "s27": 200, "s30": 1500}, {"id": "stretch", "label": "도전선", "gr": 7, "gf": 7, "s27": 300, "s30": 3000}], "defaults": {"price": 40, "loan": 2}}, "samboo": {"facts": ["1975년 준공 · 866가구 · 26~59평형 · 3종일반주거 8 : 일반상업 2", "2026.05 정비계획 변경 공람 — 용적률 559.86%, 최고 59~60층, 1,735가구(임대 239)", "추정비례율 100.03% · 권리가 추정 84㎡ 26.47억 / 101㎡ 30.38억 / 114㎡ 32.87억 / 140㎡ 39.47억", "2026.09 조합설립인가 → 시공사 등 협력사 선정 시작", "시세(2026.09.05 집계) 26평 약 31.5억 · 59평 약 49.8억 / 177㎡ 54.5억 실거래(2026.08)"], "rule": "서울 전역이 투기과열지구라서 조합설립인가(2026.09) 이후 산 집은 조합원 지위를 못 받음(현금청산). 예외는 10년 보유·5년 거주 1주택 매도자 매물뿐. 그래서 지금 사는 건 답이 아니고, 준공 뒤 신축을 사는 게 기본 루트임.", "timeline": [{"when": "2026.09", "what": "조합설립인가", "done": true}, {"when": "2027 (추정)", "what": "시공사 선정"}, {"when": "2028 (추정)", "what": "사업시행인가"}, {"when": "2029 (추정)", "what": "관리처분인가 · 이주"}, {"when": "2030 (추정)", "what": "착공 (59층, 공사 4년 안팎)"}, {"when": "2034~35 (추정)", "what": "준공 · 입주 → 매수 시점"}], "sources": [{"name": "용적률 559%에 1735가구 (2026.05)", "url": "https://m.news.nate.com/view/20260517n13605"}, {"name": "추정비례율 100.03% (한국주택경제)", "url": "https://www.arunews.com/news/articleView.html?idxno=62714"}, {"name": "조합설립인가 (MTN, 2026.09)", "url": "https://news.mtn.co.kr/news-detail/2026091615334879642"}, {"name": "시세 (리치고)", "url": "https://m.richgo.ai/realty/danji/a5INBXX"}, {"name": "조합원 지위양도 금지 (10·15 대책)", "url": "https://www.tfmedia.co.kr/mobile/article.html?no=197535"}]}, "routes": [{"id": "A", "name": "준공 후 신축 매수", "when": "2034~35", "need": "순자산 약 40~49억 (84㎡ 기준)", "verdict": "기본 루트", "why": "조합원 지위 규제와 무관. 입주 시점이 만 40~41세와 겹침. 신길 집을 그때까지 들고 가서 한 번에 갈아탐"}, {"id": "B", "name": "예외 매물로 조합원 입주권", "when": "2029~31", "need": "현금 30억+ (매수가 − 대출 2억)", "verdict": "순자산 30억 넘으면 검토", "why": "10년 보유·5년 거주 1주택 매도자 물건만 가능. 환급금까지 받는 구조라 사업성은 좋지만 실탄이 너무 큼"}, {"id": "C", "name": "일반분양 청약", "when": "2031~33 (분양 시)", "need": "분양가 대부분 현금", "verdict": "참고만", "why": "일반분양 약 630가구 예상. 1주택자는 당첨 확률이 낮고 분양가가 커서 현실성 낮음 [확인 필요]"}, {"id": "D", "name": "여의도 대체 단지", "when": "상시 감시", "need": "삼부와 같은 셈법", "verdict": "플랜 B", "why": "시범·한양·대교·광장 등. 삼부가 늦어지거나 비싸지면 같은 원칙으로 갈아끼움. 퍼플앤트 여의도 글이 그대로 감시 도구"}], "milestones": [{"year": 2026, "nw": 11.2, "side": "0 → 30만", "key": "엔진 켜기 — 퍼플앤트 인스타·두 블로그 리듬", "now": true}, {"year": 2027, "nw": 12.7, "side": "월 200만", "key": "인스타 3,000 · 협업 시작 · 유료 리포트 실험 · 사업자등록"}, {"year": 2028, "nw": 15.1, "side": "월 500만", "key": "대시보드 공개판 · 리포트 유료화 · 푸로그 원고료 협찬"}, {"year": 2029, "nw": 18.0, "side": "월 900만", "key": "대시보드 구독 · 정비사업 강의 1기 · 삼부 관리처분 확인"}, {"year": 2030, "nw": 21.5, "side": "월 1,500만", "key": "부업 연 1.8억 · 퇴사 선택권 생김 (안 해도 됨)"}, {"year": 2031, "nw": 25.2, "side": "월 1,500만", "key": "금융 5억 · 예외 매물(루트 B) 검토 시작"}, {"year": 2032, "nw": 29.2, "side": "월 1,500만", "key": "금융 8억 · 신길 집 매도 시나리오 확정"}, {"year": 2033, "nw": 33.4, "side": "월 1,500만", "key": "삼부 준공 임박 · 대출 규제·시세 재계산"}, {"year": 2034, "nw": 38.0, "side": "월 1,500만", "key": "만 40 · 삼부 입성 (평형은 그때 자금으로)", "goal": true}, {"year": 2036, "nw": 48.0, "side": "월 1,500만", "key": "순자산 50억 · 금융 10억 완성"}], "income": [{"axis": "career", "name": "본업 진급·성과급", "size": "연봉 +5~10%/년", "start": "지금", "time": "근무시간", "pick": "do", "note": "모든 부업의 바닥. 대출 한도도 근로소득이 정함. 실수 체크리스트 → 진급 카드"}, {"axis": "purpleant", "name": "퍼플앤트 블로그 애드포스트", "size": "월 5~30만", "start": "지금", "time": "주 2h", "pick": "do", "note": "대기 중인 글 21편부터 올리면 바로 늘어남"}, {"axis": "purpleant", "name": "인스타 협찬·광고", "size": "건당 30~150만", "start": "팔로워 3,000+", "time": "주 3h", "pick": "do", "note": "부동산·금융 광고는 단가가 높은 편. 대출·분양 광고는 표시 의무 지킬 것"}, {"axis": "purpleant", "name": "유료 리포트 · 뉴스레터 (월간 정비구역 현황)", "size": "월 300만 (9,900원 × 300명)", "start": "DM 리스트 1,000", "time": "월 6h", "pick": "do", "note": "이미 하는 리서치를 묶어 파는 것. 종목 추천이 아니라 정비사업 진행 현황이라 자문업 이슈 적음"}, {"axis": "side", "name": "갈아타기 대시보드 구독", "size": "월 1,000만 (19,900원 × 500명)", "start": "팔로워 1만 + 무료판 검증", "time": "초기 개발 후 유지보수", "pick": "do", "key": true, "note": "내 시간을 안 쓰는 유일한 축. 공공데이터 상업 이용 조건 [확인 필요]"}, {"axis": "purpleant", "name": "정비사업 입문 강의·전자책", "size": "연 3,600만 (30명 × 30만 × 4기)", "start": "아카이브 100편 + 후기", "time": "기수당 20h", "pick": "later", "note": "블로그 글이 그대로 교재가 됨"}, {"axis": "side", "name": "직장인 AI 자동화 콘텐츠·강의 (클로드 코드)", "size": "월 50~300만", "start": "제작기 글 반응 확인 후", "time": "월 8h", "pick": "later", "note": "대시보드 제작기 글이 이미 있음. 회사명·사내 자료는 절대 노출 안 함"}, {"axis": "foorog", "name": "푸로그 체험단", "size": "월 50~70만 (현물·식비 절감)", "start": "지금", "time": "주 2.5h", "pick": "do", "note": "시급 2만원 미만 캠페인은 거절"}, {"axis": "foorog", "name": "원고료 협찬 · 동네 가게 콘텐츠 대행", "size": "건당 10~30만 / 가게당 월 30~100만", "start": "일방문 500 · 카페 사례", "time": "주 2h", "pick": "later", "note": "민정이 카페(2027) 홍보를 도우면서 쌓은 사례가 그대로 영업 자료"}, {"axis": "asset", "name": "주식 (ISA · 연금저축 · IRP · 지수 적립)", "size": "연 6~8% 복리", "start": "지금", "time": "월 30분", "pick": "do", "note": "수익원이 아니라 부업 소득을 불리는 통. 절세 계좌 한도부터 채우고, 자동매매·레버리지는 안 함"}, {"axis": "purpleant", "name": "AI 캐릭터 인플루언서 (별도 계정)", "size": "불확실", "start": "—", "time": "주 5h+", "pick": "no", "note": "새 계정을 따로 키우면 시간이 두 배로 듦. 이미 있는 퍼비를 릴스·음성으로 키우는 게 같은 효과. 퍼비가 AI 캐릭터임"}, {"axis": "side", "name": "코인·자동매매·단타", "size": "기대값 낮음", "start": "—", "time": "많음", "pick": "no", "note": "투입 시간 대비 기대값이 가장 낮음. 동결 유지"}], "stamina": [{"rule": "주 10시간 상한", "how": "넘기면 다음 주에 반드시 뺌. 시간은 늘리지 말고 자동화로 산출물을 늘림"}, {"rule": "최소선 3개", "how": "바쁜 주에는 '퍼플앤트 1편 · 푸로그 1편 · 월요일 PM 10분'만 해도 성공으로 침"}, {"rule": "이틀 연속 빼먹지 않기", "how": "하루 쉬는 건 괜찮음. 이틀째엔 10분짜리 하나만 함 (대기 글 하나 올리기)"}, {"rule": "만들기와 올리기를 나눔", "how": "토요일은 만드는 날, 평일은 올리는 날. 이미 만든 것이 38편(퍼플앤트 21 + 푸로그 17)이라 한 달은 올리기만 해도 됨"}, {"rule": "후행 숫자는 월 1회만 봄", "how": "팔로워·방문자는 매일 보면 지침. 매일은 '올렸나'만 체크"}, {"rule": "분기마다 1주 완전 휴식", "how": "1·4·7·10월 마지막 주. 자동 발행만 돌게 둠"}, {"rule": "수면 7시간 · 운동 주 3회", "how": "잠을 깎아 만든 시간은 3주 안에 무너짐. 체중 기록은 월요일 아침 1회"}, {"rule": "작은 성과 기록", "how": "PM 로그에 '이번 주 잘한 것 1줄'. 지칠 때 보는 증거"}], "trends": {"asof": "2026-10-10 웹 조사", "groups": [{"id": "hot", "title": "요즘 뜨는 돈벌이", "sub": "2026년에 새로 열렸거나 커진 것. 대부분 진입은 쉽고 경쟁도 빨리 붙음", "items": [{"name": "네이버 클립 크리에이터 프로그램", "fact": "2026년 최대 2만 명 선발, 활동비·어워즈 포함 월 최대 90만원. 3월부터 텍스트+이미지 게시물도 수익 대상", "mine": "푸로그 숏폼을 클립에도 같이 올리고 상시 모집에 지원. 퍼플앤트 캐러셀도 이미지+텍스트라 대상이 될 수 있음", "pick": "do"}, {"name": "AI로 만드는 디지털 상품 (전자책·템플릿·체크리스트)", "fact": "진입 장벽이 낮아 가장 많이 늘었지만 경쟁도 가장 심함", "mine": "'정비사업 9단계 정리표' 무료 PDF → 단계별 체크리스트·분담금 계산 시트를 묶은 유료판으로", "pick": "later"}, {"name": "바이브코딩 마이크로 SaaS", "fact": "첫 유료 사용자까지 2~6개월, 월 100만까지 6~18개월이 보통", "mine": "갈아타기 시뮬레이터가 정확히 이것. 이미 214단지 데이터가 있어서 남보다 한참 앞에서 출발", "pick": "do"}, {"name": "쇼핑·제휴 마케팅 (릴스 쇼핑, 스레드 제휴)", "fact": "인스타 릴스가 쇼핑 중심으로 바뀌는 중. 한국 스레드는 공식 수익화가 없고 제휴가 주 수익", "mine": "푸로그 쇼핑커넥트 링크를 실제로 넣기, 밀키트 리뷰(형부떡볶이 같은)는 제휴 링크 필수", "pick": "do"}, {"name": "AI 활용법 강의·코칭", "fact": "현직 AI 크리에이터들의 수익 중 강의 비중이 큼. 툴보다 노하우를 파는 구조", "mine": "'직장인이 클로드 코드로 대시보드 만든 법'. 회사명·사내 자료 없이 개인 프로젝트로만", "pick": "later"}, {"name": "AI 가상 인플루언서", "fact": "AI 기본법(2026.1 시행) 표시 의무, 공정위 추천·보증 심사지침에 가상인물 포함. 이용자 85.6%가 AI 표시 필요하다고 답함", "mine": "새 계정 대신 퍼비를 키움. 광고·협찬에 퍼비가 나오면 AI 생성 표시를 붙임", "pick": "no"}]}, {"id": "accounts", "title": "SNS에서 급성장하는 계정 유형", "sub": "'무엇을 다루나'보다 '어떻게 생겼나'가 성장을 가름", "items": [{"name": "한 줄 콘셉트 + 캐릭터가 보이는 재테크 계정", "fact": "게시물 28개로 팔로워 3.4만 사례. 정보 전달자가 아니라 캐릭터가 보여야 한다는 분석", "mine": "퍼비가 바로 이 공식. 표지마다 퍼비 표정 + '서울 정비사업 단계' 한 줄 고정", "pick": "do"}, {"name": "팔로워보다 조회수가 수십 배 나오는 소규모 릴스 계정", "fact": "비팔로워 도달이 성장의 엔진. 팔로워의 30배 조회 사례", "mine": "푸로그 이한스시 릴스가 평소의 21배. 1군 로컬 릴스를 주 2개로 늘리는 근거", "pick": "do"}, {"name": "원문·현장 사진으로 '사람이 만든' 티가 나는 계정", "fact": "AI 콘텐츠가 넘치면서 사람다운 콘텐츠를 더 의심하고 더 찾음", "mine": "고시문 캡처·직접 찍은 임장 사진·실거래 원자료를 슬라이드에 그대로. 다른 계정이 귀찮아서 안 하는 것", "pick": "do"}, {"name": "스레드 텍스트 계정", "fact": "카톡 이용은 줄고 스레드는 느는 중(오픈서베이 2026)", "mine": "퍼플앤트 속보 한 줄을 스레드에도 복붙 (하루 2분). 따로 콘텐츠는 안 만듦", "pick": "do"}, {"name": "동네 하이퍼로컬 계정", "fact": "검색·지도 기반 수요가 꾸준하고 광고주가 직접 찾아옴", "mine": "푸로그 서남권 1군 전략 그대로. 로컬 비율 12% → 70%", "pick": "do"}, {"name": "저축·짠테크 테마", "fact": "한 보고서에서 저축 주제 크리에이터 비중이 32% → 76%로 늘었다고 함 (단일 출처)", "mine": "퍼플앤트 '직장인 내집마련 자금 계획' 시리즈로 흡수 — 갈아타기 3부작과 연결", "pick": "later"}]}, {"id": "longrun", "title": "롱런하는 성장형 돈벌이", "sub": "유행이 지나도 남는 것. 8년 계획은 이쪽에 무게를 둠", "items": [{"name": "내가 소유한 청중 (뉴스레터·DM 리스트·카톡 채널)", "fact": "플랫폼 알고리즘이 바뀌어도 남는 '보험'. 무료→유료 전환 2~5%가 보통이라는 분석", "mine": "리드마그넷 PDF로 DM 리스트를 모으고 월간 정비사업 달력 → 유료 리포트로", "pick": "do"}, {"name": "유료 커뮤니티 · 기수제 강의", "fact": "콘텐츠보다 커뮤니티가 복제하기 어려움", "mine": "아카이브 100편 이후 '정비사업 입문 4주' 기수제", "pick": "later"}, {"name": "데이터 자산 + 도구 (구독형)", "fact": "남이 못 따라하는 데이터가 해자", "mine": "갈아타기 대시보드 → 구독. 퍼플앤트 사다리의 ④", "pick": "do"}, {"name": "검색 자산 (블로그 에버그린·허브 글)", "fact": "한 번 1페이지에 오른 글은 몇 년 동안 유입을 만듦", "mine": "퍼플앤트 기둥 글(2040 서울 도시기본계획, 정보 사이트 가이드) · 푸로그 필러 글 3개", "pick": "do"}, {"name": "지수 적립 + 절세 계좌", "fact": "수익률보다 넣는 돈이 결과를 정함", "mine": "ISA·연금저축·IRP 한도부터 채우고, 부업 소득의 80%를 자동 이체", "pick": "do"}, {"name": "본업 전문성 · 실거주 1채 장기보유", "fact": "근로소득은 대출 한도의 근거, 1주택 장기보유는 세금이 가장 유리", "mine": "진급 체크리스트 + 신길 집 유지 → 2034년 한 번에 점프", "pick": "do"}]}], "sources": [{"name": "네이버 클립 크리에이터 최대 2만 명 (네이트·2026.02)", "url": "https://m.news.nate.com/view/20260206n29119"}, {"name": "네이버 클립 수익 지원 확대 (바이라인네트워크·2026.03)", "url": "https://byline.network/2026/03/09_naver_clip/"}, {"name": "한국 스레드 수익화 현황 (Throk)", "url": "https://www.throk.ai/ko/blog/threads-monetization-guide"}, {"name": "2026 인스타 계정 성장 사례 분석 (하이아웃풋클럽)", "url": "https://blog.highoutputclub.com/2026-reels-growth-instagram-accounts-strategy/"}, {"name": "2026 소셜미디어 트렌드 (오픈서베이)", "url": "https://blog.opensurvey.co.kr/article/socialmedia-2026-2/"}, {"name": "Instagram Trends 2026 (Sprout Social)", "url": "https://sproutsocial.com/insights/instagram-trends/"}, {"name": "Creator Economy Trends 2026 (Stan)", "url": "https://stan.store/blog/creator-economy-trends-2026/"}, {"name": "12 Creator Economy Trends 2026 (Venture Lab)", "url": "https://venture-lab.org/2026/creator-economy-trends-2026/"}, {"name": "AI로 부수입 만드는 현실적인 방법 (라이프너드)", "url": "https://korlifenerd.com/ai-side-income-realistic-guide-2026/"}, {"name": "AI 가상인물 광고 규제 (청출)", "url": "https://cheongchul.com/blog/ai-%EA%B0%80%EC%83%81%EC%9D%B8%EB%AC%BC-%EA%B4%91%EA%B3%A0-%EA%B7%9C%EC%A0%9C"}, {"name": "퇴근 후 AI로 돈 번다 (코리아데일리·2026.07)", "url": "https://www.koreadaily.com/article/20260702220531871"}], "caveat": "대부분 업계 블로그·벤더 자료라 수익 숫자는 참고용. 공식 수치는 네이버 발표와 법령 쪽만 비교적 확실함."}, "hours": [{"axis": "purpleant", "label": "퍼플앤트", "h": 5, "note": "블로그 올리기 2h + 인스타 3h · 2030 엔진 본체"}, {"axis": "foorog", "label": "푸로그", "h": 2.5, "note": "4종 콘텐츠 1세트/주 · 대기 세트 올리기"}, {"axis": "career", "label": "현업", "h": 1.5, "note": "퇴근 후는 읽고 → 내 도면 대조만"}, {"axis": "side", "label": "사이드 개발", "h": 1, "note": "새 기능 동결 · 콘텐츠로 뽑아쓰기만"}], "week": {"id": "2026-W42", "range": "10/12 월 — 10/18 일", "theme": "쌓아둔 것 올리기 주간 — 새로 만들지 말고 대기 글부터", "retro": ["지난 2주(W40·W41)에 8개 중 5개 완료 — 퍼플앤트 블로그 재개, 푸로그 발행, 자산 시트 기록, 퍼비 표정, 체중·운동", "퍼플앤트는 인스타 13개·장치 깔기 5/5 끝. 대신 써둔 글 21편이 대기 중", "푸로그는 블로그 일방문이 150에서 124로 내려감. 로컬(1·2군) 비율 12% — 1군 세트 3개가 40일째 대기"], "tasks": [{"id": "w42-1", "axis": "purpleant", "must": true, "text": "퍼플앤트 대기 글 2편 올리기 — 구의·자양 → 송파 ②", "note": "현황판 1·2번. 10/14·10/21 캐러셀이 블로그 글을 기다리고 있음"}, {"id": "w42-2", "axis": "foorog", "must": true, "text": "푸로그 1군 대기 세트 2개 올리기 — 와인블랑(신길) · 동래정(신풍역)", "note": "40일째 대기. 로컬 비율 12% → 올리는 즉시 오름"}, {"id": "w42-3", "axis": "pm", "must": true, "text": "월요일 PM 10분 — 보드 체크만", "note": "이번 주 최소선의 마지막 하나"}, {"id": "w42-4", "axis": "side", "text": "갈아타기 대시보드 미커밋 51건 커밋·푸시 (지난주 이월)", "note": "맥 터미널에서 대시보드 폴더로 가서 git add -A → git commit → git push. 맥이 고장 나면 이 변경이 사라짐"}, {"id": "w42-5", "axis": "purpleant", "text": "인스타 프로필 바이오 4줄 + 자기소개 캐러셀 고정", "note": "현황판 2단계. 팔로워 8명 → 프로필이 전환을 만듦"}, {"id": "w42-6", "axis": "career", "text": "실수 로그 파일 만들고 첫 줄 (지난주 이월)", "note": "하루 1분. 12월 체크리스트 20줄의 재료"}, {"id": "w42-7", "axis": "asset", "text": "구글 커넥터 연결 → 자산 시트 자동 확인", "note": "claude.ai/customize/connectors 에서 Google Drive 연결 후 새 세션. 그 전까진 숫자 3개만 채팅으로"}]}, "month": {"id": "2026-10", "theme": "엔진 켜기 — 인스타 장치는 끝, 남은 건 쌓인 글 올리기", "tasks": [{"id": "m10-1", "axis": "purpleant", "text": "리드마그넷 「정비사업 9단계 한 장 정리표」 PDF", "note": "9단계 1분 사전 캐러셀은 올라감. DM으로 줄 PDF 버전만 남음"}, {"id": "m10-2", "axis": "purpleant", "text": "캐러셀 엔진 · 자동 발행 · 텔레그램 승인", "note": "현황판 1단계 5/5 완료"}, {"id": "m10-3", "axis": "purpleant", "text": "인스타 계정 개설 + 첫 게시물", "note": "9/28 시작 · 10/6 기준 게시물 13개"}, {"id": "m10-4", "axis": "purpleant", "text": "퍼플앤트 대기 글 21편 중 8편 올리기", "note": "현황판 순서대로. 캐러셀 대기 글 우선"}, {"id": "m10-5", "axis": "purpleant", "text": "인스타 2단계 첫인상 6개 완료", "note": "바이오 · 하이라이트 · 상위 글 5편에 인스타 배너 · 스토리 공유"}, {"id": "m10-6", "axis": "foorog", "text": "푸로그 대기 세트 17개 중 8개 올리기 (1·2군 먼저)", "note": "와인블랑 · 동래정 · 김기현초밥 · TDBD · 카키코우죠 · 아프리콧 · 충남미림 · 마타사"}, {"id": "m10-7", "axis": "foorog", "text": "인스타 소개에 지역 한 줄 + 유튜브 재생목록 5개 + 네이버 클립 동시 업로드 시작", "note": "클립 크리에이터 상시 모집 지원 — 월 최대 90만 활동비"}, {"id": "m10-8", "axis": "foorog", "text": "필러 글 1호 「영등포 맛집 총정리」", "note": "기존 1군 글 링크로. 새 취재 없음"}, {"id": "m10-9", "axis": "career", "text": "두께 지도 1장 + 승인 소재 5종 비교표", "note": "퇴근 후 주 1.5h 안에서만"}, {"id": "m10-10", "axis": "asset", "text": "숫자 3개 확정: 현금흐름 · DSR/대출한도 · 6월 대출 1.17억 손익", "note": "입성 계산기의 시작값이 됨"}, {"id": "m10-11", "axis": "asset", "text": "절세 계좌 점검 — ISA · 연금저축 · IRP 개설 여부와 올해 납입", "note": "연금저축+IRP 900만 세액공제. 연말 전에 확인"}, {"id": "m10-12", "axis": "side", "text": "대시보드: 여의도 워치리스트에 삼부 + 대체 단지 태깅", "note": "시범 · 한양 · 대교 · 광장. 단계 바뀌면 퍼플앤트 속보 소재"}]}, "gauges": [{"name": "순자산", "now": "10.96억", "asof": "9/5 시트", "target": "11.2억", "by": "12월", "state": "stale", "hint": "구글 시트 연결 전이라 9/5 값"}, {"name": "순금융자산 (대출 제외)", "now": "0.47억", "asof": "9/5 시트", "target": "0.55억", "by": "12월", "state": "stale"}, {"name": "부업 현금 월수익", "now": "확인 필요", "asof": "—", "target": "월 30만", "by": "12월", "state": "stale", "hint": "체험단 현물 제외"}, {"name": "퍼플앤트 블로그", "now": "발행 20 · 대기 21", "asof": "10/6", "target": "대기 0", "by": "11월 말", "state": "behind", "hint": "9/18 이후 6편 발행"}, {"name": "퍼플앤트 인스타", "now": "팔로워 8 · 게시물 13", "asof": "10/6", "target": "팔로워 1,000", "by": "12월 말", "state": "behind"}, {"name": "푸로그 블로그 일방문", "now": "124", "asof": "10/9 (4일 평균)", "target": "300", "by": "11월", "state": "behind", "hint": "9/7 약 150 → 124"}, {"name": "푸로그 대기 세트", "now": "17 / 50", "asof": "10/9", "target": "5 이하", "by": "11월", "state": "behind", "hint": "로컬(1·2군) 비율 12% · 목표 70%"}, {"name": "푸로그 인스타 · 유튜브", "now": "390 · 45", "asof": "10/9", "target": "700 · 150", "by": "11월", "state": "behind", "hint": "팔로잉 201 (정리 거의 끝)"}, {"name": "체중", "now": "확인 필요", "asof": "—", "target": "68kg", "by": "12/31", "state": "stale", "hint": "9월 72kg"}], "inventory_note": "퍼플앤트 현황판(10/6)과 푸로그 작전판(10/9)이 블로그·인스타를 직접 대조한 숫자. 글 목록은 각 현황판에 있음.", "backlog": {"purpleant": {"label": "퍼플앤트 글", "n": 21}, "foorog": {"label": "푸로그 세트", "n": 17}}, "inventory": [{"axis": "purpleant", "item": "퍼플앤트 써둔 글 21편", "made": "바로 올리기 16 · 최신화 후 5", "channel": "네이버 블로그", "status": "none", "action": "현황판 순서대로. 1번 구의·자양 → 송파 ② → 신도림", "link": "https://claude.ai/artifact/K5WR4gWEfJ5eqgHFa2NTCM"}, {"axis": "purpleant", "item": "캐러셀 대기 (블로그 글을 기다리는 것)", "made": "10/14·10/16 갈아타기 · 10/21 구의자양 · 10/23 신반포 · 10/28 하이엔드", "channel": "인스타", "status": "none", "action": "연결된 블로그 글이 먼저 올라가야 자동 발행됨"}, {"axis": "foorog", "item": "푸로그 4종 콘텐츠 세트 17개", "made": "1군 2 · 2군 6 · 3군 5 · 핫플 2 · 기타 2", "channel": "블로그·인스타", "status": "none", "action": "1·2군 먼저 8개. 오래된 3군(마타사·문배동육칼·아틀리에콩포트, 60일째)은 그다음", "link": "https://claude.ai/artifact/WUcLmfXSppjesvSgf1eHxr"}, {"axis": "foorog", "item": "블로그엔 올렸는데 인스타 안 올린 세트", "made": "홍보각 · 형부떡볶이 · 멜로우즈 · 만동제과 등", "channel": "인스타 릴스", "status": "none", "action": "릴스 자동편집본 있는 것부터 (멜로우즈 자막·음성 완료)"}, {"axis": "side", "item": "3D 여의도(아스트라) 결과 화면", "made": "릴스 #1 완성 (텔레그램)", "channel": "인스타 릴스", "status": "check", "action": "퍼플앤트 현황판 3단계에 들어가 있음"}, {"axis": "side", "item": "갈아타기 대시보드 214단지 · 12축 점수", "made": "완성 · 로컬", "channel": "인스타·블로그", "status": "none", "action": "인스타 30일차 이후 「한강변 재건축 점수 TOP10」"}], "weekgrid": [{"day": "월", "items": [{"axis": "purpleant", "t": "인스타 캐러셀 20시 (자동)"}, {"axis": "pm", "t": "주간 PM 10분"}]}, {"day": "화", "items": [{"axis": "foorog", "t": "블로그 1편"}, {"axis": "purpleant", "t": "속보 12시 (자동)"}]}, {"day": "수", "items": [{"axis": "purpleant", "t": "블로그 1편"}, {"axis": "purpleant", "t": "인스타 캐러셀 (자동)"}]}, {"day": "목", "items": [{"axis": "foorog", "t": "릴스·숏폼 1개"}]}, {"day": "금", "items": [{"axis": "purpleant", "t": "인스타 캐러셀 (자동)"}]}, {"day": "토", "items": [{"axis": "foorog", "t": "촬영 1~2곳 (1군 우선)"}, {"axis": "purpleant", "t": "만드는 날 — 새 글 초안"}]}, {"day": "일", "items": [{"axis": "foorog", "t": "방문 메모 → 4종 초안"}, {"axis": "career", "t": "읽기 30분 · 도면 대조 60분"}]}], "cadence": [{"axis": "purpleant", "channel": "네이버 블로그", "rhythm": "주 2편 (대기 글 소진까지) → 이후 주 1편", "per_month": 8, "why": "대기 21편을 11월 말까지 소진. 캐러셀이 블로그 글에 묶여 있어서 이게 병목", "status": "live"}, {"axis": "purpleant", "channel": "인스타 캐러셀 · 속보", "rhythm": "캐러셀 월·수·금 20시 · 속보 하루 1개 12시", "per_month": 40, "why": "자동 발행. 사람 손은 승인 버튼과 댓글만", "status": "live"}, {"axis": "purpleant", "channel": "인스타 릴스", "rhythm": "주 1개", "per_month": 4, "why": "3단계(10/13~). 여의도 3D 과정 → 데이터 릴스", "status": "planned", "start": "2026-10"}, {"axis": "foorog", "channel": "네이버 블로그", "rhythm": "주 2편 (대기 세트 소진까지)", "per_month": 8, "why": "1·2군 먼저. 로컬 7 : 핫플 3", "status": "live"}, {"axis": "foorog", "channel": "인스타 릴스 · 유튜브 숏폼", "rhythm": "주 2개", "per_month": 8, "why": "1군 릴스가 평소의 12배(이한스시 21배). 1군 위주로", "status": "live"}, {"axis": "career", "channel": "사내 (비공개)", "rhythm": "분기 산출물 1개", "per_month": 0, "why": "실수 체크리스트 → DR 체크리스트 → 사내 발표", "status": "live"}, {"axis": "asset", "channel": "자산 시트", "rhythm": "매월 1일 30분", "per_month": 1, "why": "계기판 → 입성 계산기 갱신", "status": "live"}], "proposals": [{"axis": "purpleant", "when": "11월", "title": "여의도 재건축 단지별 단계 보드 (삼부·시범·한양·대교·광장)", "format": "블로그 + 캐러셀 + 대시보드 워치리스트", "why": "내 입성 목표를 그대로 콘텐츠로. 리서치 한 번에 글·카드·감시가 같이 됨"}, {"axis": "purpleant", "when": "11~12월", "title": "「삼부 조합설립 이후, 지금 사면 왜 안 되나」 조합원 지위양도 해설", "format": "블로그 + 캐러셀", "why": "10·15 대책 이후 가장 많이 헷갈리는 규칙. 저장각"}, {"axis": "purpleant", "when": "매월 1일", "title": "월간 정비사업 달력", "format": "캐러셀 → 나중에 유료 리포트 원형", "why": "현황판 3단계에 이미 있음. 유료 리포트(월 300만 축)의 무료 맛보기"}, {"axis": "side", "when": "2027 Q1", "title": "갈아타기 시뮬레이터 공개판", "format": "웹 도구 (무료)", "why": "'지금 집 팔면 어디까지 가나' — 리드마그넷이자 구독의 1단계"}, {"axis": "side", "when": "블로그 대기 소진 후", "title": "클로드 코드로 대시보드 만든 직장인 시리즈", "format": "블로그 3편", "why": "AI 자동화 수익축 반응 테스트. 회사·사내 자료 노출 없이"}, {"axis": "foorog", "when": "10~11월", "title": "신길·영등포 밥집 도장깨기 #1~ (대기 1군 세트로 시작)", "format": "4종 콘텐츠", "why": "1군 릴스가 평소의 12배. 로컬 비율과 조회수를 동시에 올림"}, {"axis": "foorog", "when": "11월", "title": "필러 글 「영등포 맛집 총정리」 · 「여의도 점심 1만원대」", "format": "블로그 허브 글", "why": "기존 글 링크로 만듦. 여의도 글은 퍼플앤트 입성 지역과도 겹침"}, {"axis": "foorog", "when": "2027 상반기", "title": "민정이 카페 오픈 준비 기록 (돕는 사람 시점)", "format": "블로그·릴스", "why": "카페는 민정이 하고 유상은 돕는 역할. 오픈 홍보 + 동네 가게 대행 사례"}], "axes": [{"id": "purpleant", "name": "퍼플앤트", "role": "입성 엔진 본체 · 경제·주식·부동산", "now": "블로그 발행 20 · 대기 21 · 인스타 9/28 시작, 팔로워 8 · 게시물 13 · 장치 깔기 5/5", "next": "대기 글 소진 + 인스타 첫인상(바이오·고정 게시물)", "ladder": [{"step": "① 블로그 애드포스트", "gate": "지금", "size": "월 5~30만"}, {"step": "② 인스타 협업·광고", "gate": "팔로워 3,000 + 저장률 3%", "size": "월 200~400만"}, {"step": "③ 유료 리포트 (월간 구역 현황)", "gate": "DM 리스트 1,000명", "size": "월 300만"}, {"step": "④ 갈아타기 대시보드 구독", "gate": "팔로워 1만 + 무료판 검증", "size": "월 1,000만", "key": true}, {"step": "⑤ 강의·전자책", "gate": "아카이브 100편", "size": "연 3,600만"}, {"step": "⑥ 컨설팅·제휴", "gate": "④⑤ 검증 후", "size": "월 300~500만+"}], "phases": [{"when": "9/28~10/4", "name": "1단계 · 장치 깔기", "goal": "5/5 완료"}, {"when": "10/5~10/12", "name": "2단계 · 첫인상", "goal": "바이오 · 하이라이트 · 고정 게시물 · 배너", "now": true}, {"when": "10/13~11/9", "name": "3단계 · 유입 실험", "goal": "지역 패키지 · 신고가 속보 · 릴스 주 1"}, {"when": "11/10~12/31", "name": "4단계 · 몰빵", "goal": "4주 결과로 형식 2개만 남김 · 팔로워 1,000"}], "stop": "인스타 12개월에 3,000 못 넘으면 → 블로그 + 대시보드 구독으로 재편"}, {"id": "foorog", "name": "푸로그", "role": "생활비 방어 · 민정이 카페 홍보 지원", "now": "블로그 일방문 124 · 인스타 390 · 유튜브 45 · 세트 50개 중 33개 발행", "next": "대기 1·2군 세트 올리기 → 로컬 비율 70%", "ladder": [{"step": "체험단 (식비 절감)", "gate": "지금 · 시급 2만 기준", "size": "월 50~70만 현물"}, {"step": "애드포스트 + 쇼핑커넥트", "gate": "일방문 1,000", "size": "월 13~30만"}, {"step": "원고료(현금) 협찬", "gate": "일방문 500", "size": "건당 10~30만"}, {"step": "지역 매장 직접 협찬", "gate": "제안서 + 실적", "size": "건당 5~20만"}, {"step": "동네 가게 콘텐츠 대행", "gate": "민정이 카페 오픈 사례", "size": "월 30~100만", "key": true}], "phases": [{"when": "09~11월", "name": "토대", "goal": "대기 세트 소진 · 로컬 70% · 일방문 300", "now": true}, {"when": "12~02월", "name": "결정", "goal": "롱폼 · 첫 유료 협찬 · 일방문 400"}, {"when": "03~05월", "name": "카페 오픈 지원", "goal": "민정이 카페 홍보 · 일방문 500~600"}, {"when": "06~09월", "name": "수확", "goal": "일방문 1,000 · 부수익 월 50~100만"}], "stop": "채널을 늘리지 않음. 카페 일은 돕는 범위까지만"}, {"id": "career", "name": "현업 · 외장설계", "role": "월급 바닥 · 대출 한도의 근거", "now": "Q4 진급 시즌 · Claude 교본은 개인 참고용", "next": "실수 로그 → 12월 체크리스트 v1 (20줄)", "ladder": [{"step": "Stage 1 · 사고 안 내는 설계자", "gate": "2026 Q4 — 2027 Q2", "size": "P1 6개 주제"}, {"step": "Stage 2 · 이유를 설명하는 설계자", "gate": "2027 Q3 — 2028", "size": "사내 발표 1회"}, {"step": "Stage 3 · 시스템을 보는 설계자", "gate": "2029 —", "size": "특허·발표 1건"}], "phases": [{"when": "10월", "name": "두께·싱크·수축", "goal": "두께 지도 · 소재 5종 비교표", "now": true}, {"when": "11월", "name": "리브·보스 · 스냅핏", "goal": "싱크 사례 원인표 · 현장 1회"}, {"when": "12월", "name": "체크리스트 v1", "goal": "도면 제출 전 5분 통과"}], "stop": "사내 자료는 개인 Claude·블로그에 절대 넣지 않음"}, {"id": "side", "name": "사이드 프로젝트", "role": "도구 → 콘텐츠 원재료 → 구독 상품", "now": "갈아타기 대시보드 214단지 · 3D 여의도 · 주식 대시보드 · 자동매매(동결)", "next": "미커밋 51건 지키기 → 여의도 워치리스트", "ladder": [{"step": "0 · 지키기", "gate": "이번 주", "size": "커밋·푸시"}, {"step": "1 · 나를 위한 기능", "gate": "11월", "size": "워치리스트 · 갈아타기 시뮬레이터"}, {"step": "2 · 콘텐츠 엔진화", "gate": "인스타 30일차", "size": "카드 자동 생성", "key": true}, {"step": "3 · 무료 공개판", "gate": "팔로워 1,000+", "size": "리드마그넷"}, {"step": "4 · SaaS", "gate": "팔로워 3,000+", "size": "구독 (퍼플앤트 ④)"}], "phases": [], "stop": "새 기능 동결. 청중 먼저, 도구는 그다음"}], "sources": [{"name": "퍼플앤트 현황판", "url": "https://claude.ai/artifact/K5WR4gWEfJ5eqgHFa2NTCM", "date": "10/6", "role": "월간 PM 때 확인 — 대기 글·인스타 일정·단계 체크"}, {"name": "푸로그 유니버스 작전판", "url": "https://claude.ai/artifact/WUcLmfXSppjesvSgf1eHxr", "date": "10/9", "role": "월간 PM 때 확인 — 발행 대조·채널 숫자·로드맵"}, {"name": "2040 입성 플랜", "url": "https://claude.ai/artifact/D7MtWmmLWAW6zP6euNbgqH", "date": "9/27", "role": "이전판. 목표가 '2034 삼부'로 바뀌어 이 보드가 최상위가 됨"}, {"name": "외장설계 역량 로드맵", "url": "https://claude.ai/artifact/QGy7MTDK8N1wPc8QDE6W6e", "date": "9/28", "role": "현업 주제 카드·자료"}, {"name": "퍼플앤트 인스타 런치 플랜", "url": "https://claude.ai/artifact/MrEL6mQUqM2RGB4huCmF4r", "date": "8/30", "role": "훅·슬라이드·퍼널 설계"}, {"name": "한강으로 가는 14년", "url": "https://claude.ai/artifact/WhS82u2KBRncGtYTbSAxxy", "date": "9/6", "role": "더 이전판. 참고만"}], "conflicts": ["최상위 목표: 2040 입성 플랜(9/27)의 '2040 상급지' → 10/10 '만 40(2034) 삼부 + 금융 10억'으로 교체. 이 보드가 최상위 기준", "1차 갈아타기: 이전 플랜은 2031~33 중간 단계 → 신길 집을 유지하고 2034에 한 번에 점프하는 쪽으로 바꿈 (세금·수수료 두 번 안 냄, 1주택 장기보유 공제)", "퍼플앤트 인스타 목표: PM 보드 500명 / 퍼플앤트 현황판 1,000명 → 현황판 기준 1,000명", "카페: 민정이가 2027년에 함. 유상은 돕는 역할이라 창업일기·카페 할 일은 이 보드에서 뺌", "Claude 교본: 사내 공유 안 함, 개인 참고용 → 재고에서 뺌"], "log": [{"date": "2026-09-28", "text": "PM 보드 신설. 로드맵 7개를 통합하고 W40·10월 할 일을 뽑음"}, {"date": "2026-10-10", "text": "월간 PM(10월). W40 8개 중 5개 완료. 퍼플앤트·푸로그 현황판 숫자 반영, 목표를 '만 40(2034) 삼부 입성 + 금융 10억'으로 바꾸고 입성 계산기·수익원·지치지 않는 규칙 추가. 자산 시트는 구글 미연결로 9/5 값 유지"}]}</script>
 
 <div class="wrap">
   <header class="mast">
-    <div class="lbl" id="h-eyebrow">PM 보드</div>
-    <h1 id="h-title">이번 주 할 일</h1>
+    <div class="lbl" id="h-eyebrow">자산증식 현황판</div>
+    <h1 id="h-title"></h1>
     <p class="theme" id="h-theme"></p>
     <p class="rule" id="h-rule"></p>
     <div class="stats">
+      <div class="stat"><div class="lbl">만 40까지</div><div class="v" id="st-dday"></div><div class="s">2034년 말 · 삼부 입성</div></div>
+      <div class="stat"><div class="lbl">순자산 지금 → 2034 계획</div><div class="v" id="st-nw"></div><div class="s" id="st-nw-s"></div></div>
       <div class="stat"><div class="lbl">이번 주</div><div class="v" id="st-week">0 / 0</div><div class="meter"><i id="mt-week"></i></div></div>
       <div class="stat"><div class="lbl">이번 달</div><div class="v" id="st-month">0 / 0</div><div class="meter"><i id="mt-month"></i></div></div>
-      <div class="stat"><div class="lbl">미업로드 · 확인 필요</div><div class="v" id="st-inv">0</div><div class="s" id="st-inv-s"></div></div>
-      <div class="stat"><div class="lbl">다음 주간 PM</div><div class="v" id="st-next" style="font-size:16px"></div><div class="s" id="st-next-s"></div></div>
-      <div class="stat"><div class="lbl">2030 관문까지</div><div class="v" id="st-2030"></div><div class="s">순금융자산 5억</div></div>
+      <div class="stat"><div class="lbl">안 올린 콘텐츠</div><div class="v" id="st-inv">0</div><div class="s" id="st-inv-s"></div></div>
     </div>
   </header>
 </div>
 
 <nav class="jump" aria-label="섹션 이동"><div class="in">
-  <a href="#week">이번 주</a><a href="#inventory">미업로드</a><a href="#cadence">발행 주기</a>
-  <a href="#ideas">만들 콘텐츠</a><a href="#gauges">계기판</a><a href="#axes">축별 성장</a><a href="#road">로드맵</a><a href="#ops">운영법</a>
+  <a href="#week">이번 주</a><a href="#goal">입성 계산기</a><a href="#samboo">삼부 루트</a><a href="#path">연도별</a>
+  <a href="#money">돈 버는 법</a><a href="#trend">트렌드</a><a href="#stamina">안 지치는 법</a><a href="#inventory">미업로드</a><a href="#cadence">발행 주기</a>
+  <a href="#ideas">만들 콘텐츠</a><a href="#gauges">계기판</a><a href="#axes">축별 성장</a><a href="#ops">운영법</a>
 </div></nav>
 
 <div class="wrap">
   <section id="week">
     <div class="sh"><h2>이번 주 · 이번 달</h2><span class="when" id="wk-range"></span></div>
+    <div class="retro" id="retro"><div class="lbl">지난 주기 회고</div><ul id="retro-list"></ul></div>
     <p class="deck">체크하면 저장되고, 다음 주간 PM 때 클로드가 이 체크 상태를 읽어서 회고함. 왼쪽 색 띠가 있는 3개가 이번 주 최소선.</p>
     <div class="two">
       <div>
@@ -220,6 +279,75 @@ td.nw{white-space:nowrap}
       <div class="list"><div class="list-h"><b id="mo-id">이번 달</b><span class="cnt" id="mo-cnt"></span></div><div id="mo-list"></div></div>
     </div>
     <p class="sync" id="sync">체크 상태 불러오는 중</p>
+  </section>
+
+  <section id="goal">
+    <div class="sh"><h2>입성 계산기 — 2034년에 어디 있나</h2></div>
+    <p class="deck" id="goal-honest"></p>
+    <div class="calc">
+      <div class="presets" id="presets" role="group" aria-label="시나리오"></div>
+      <div class="chart" id="chart" aria-label="연도별 순자산 예상"></div>
+      <div class="readout">
+        <div><div class="lbl">2034 순자산 예상</div><div class="big" id="r-nw"></div></div>
+        <div><div class="lbl">삼부 + 금융 10억에 필요한 순자산</div><div class="big need" id="r-need"></div></div>
+        <div class="verdict" id="r-verdict"></div>
+      </div>
+      <div class="sliders">
+        <div class="sld"><label for="s-gr">부동산 연 상승률 <span id="v-gr"></span></label><input type="range" id="s-gr" min="2" max="10" step="0.5"><div class="hint">지금 집(시트상 부동산 18억) 기준. 서울 상급지 장기 평균은 6~8% 안팎</div></div>
+        <div class="sld"><label for="s-gf">금융 연 수익률 <span id="v-gf"></span></label><input type="range" id="s-gf" min="2" max="12" step="0.5"><div class="hint">지수 적립 기준 6~8%. 이걸 올리는 것보다 넣는 돈을 늘리는 게 훨씬 큼</div></div>
+        <div class="sld"><label for="s-s27">2027년 부업 월수익 <span id="v-s27"></span></label><input type="range" id="s-s27" min="0" max="1000" step="50"><div class="hint">2027→2030 사이는 직선으로 늘어난다고 가정 · 80%를 금융자산으로</div></div>
+        <div class="sld"><label for="s-s30">2030년 이후 부업 월수익 <span id="v-s30"></span></label><input type="range" id="s-s30" min="0" max="4000" step="100"><div class="hint">퍼플앤트 ③ 리포트 + ④ 구독 + ⑤ 강의가 다 켜지면 월 1,500만 안팎</div></div>
+        <div class="sld"><label for="s-price">2034 삼부 신축 가격 <span id="v-price"></span></label><input type="range" id="s-price" min="25" max="55" step="1"><div class="hint">현재 권리가 추정 84㎡ 26.5억 · 구축 26평 시세 31.5억. 59㎡면 낮춰서 볼 것</div></div>
+        <div class="sld"><label for="s-loan">그때 받을 수 있는 주담대 <span id="v-loan"></span></label><input type="range" id="s-loan" min="0" max="15" step="1"><div class="hint">지금 규제: 25억 초과 주택 최대 2억. 규제가 풀리면 올려볼 것</div></div>
+      </div>
+    </div>
+    <p class="fine">계산: 시작값은 9/5 시트(부동산 18억 · 부채 8.68억 · 금융 1.64억). 매년 기본 저축 1,100만 + 원금상환 1,080만, 취득세 3.5% 반영. 양도세·종부세·인플레이션은 빠져 있음. 종목·단지 추천이 아니라 계획용 모델임.</p>
+  </section>
+
+  <section id="samboo">
+    <div class="sh"><h2>삼부 입성 루트</h2></div>
+    <p class="deck" id="sb-rule"></p>
+    <div class="two">
+      <div>
+        <div class="lbl" style="margin-bottom:8px">삼부 지금 상태</div>
+        <ul class="facts" id="sb-facts"></ul>
+        <div class="lbl" style="margin:18px 0 8px">사업 일정 (조합설립 이후는 추정)</div>
+        <ol class="sbt" id="sb-time"></ol>
+      </div>
+      <div class="routes" id="routes"></div>
+    </div>
+    <p class="fine" id="sb-src"></p>
+  </section>
+
+  <section id="path">
+    <div class="sh"><h2>연도별 — 계획선</h2></div>
+    <p class="deck">계산기의 '계획선'을 연도별로 펼친 것. 매년 12월 월간 PM에서 실제 순자산과 비교해서 위면 그대로, 아래면 부업 축을 손봄.</p>
+    <div class="tw"><table>
+      <thead><tr><th>연도</th><th>만 나이</th><th class="nw">순자산 계획</th><th class="nw">부업 월수익</th><th>그해의 한 가지</th></tr></thead>
+      <tbody id="ms-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="money">
+    <div class="sh"><h2>돈 버는 방법 — 유상이 할 수 있는 것 전부</h2></div>
+    <p class="deck">'지금'은 이미 하거나 바로 할 것, '나중'은 앞 칸이 열리면 할 것, '안 함'은 시간 대비 기대값이 낮아서 일부러 빼는 것.</p>
+    <div class="tw"><table>
+      <thead><tr><th>판정</th><th>축</th><th>방법</th><th class="nw">규모</th><th>열리는 조건</th><th>메모</th></tr></thead>
+      <tbody id="inc-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="trend">
+    <div class="sh"><h2>요즘 트렌드 조사</h2><span class="when" id="tr-asof"></span></div>
+    <p class="deck" id="tr-cav"></p>
+    <div id="tr-groups"></div>
+    <p class="fine" id="tr-src"></p>
+  </section>
+
+  <section id="stamina">
+    <div class="sh"><h2>안 지치고 8년 가는 법</h2></div>
+    <p class="deck">8년짜리 계획은 의지가 아니라 규칙으로 버팀. 지칠 때 할 일을 줄이는 기준을 미리 정해둠.</p>
+    <div class="rules" id="rules"></div>
   </section>
 
   <section id="inventory">
@@ -260,12 +388,6 @@ td.nw{white-space:nowrap}
     <div class="sh"><h2>축별 성장 — 어떻게 자산이 되나</h2></div>
     <p class="deck">사다리는 순서대로만 열림. 앞 칸이 뒷 칸의 재료라서 동시에 켜면 전부 죽음. 강조된 칸이 각 축의 최대 지렛대.</p>
     <div class="axes" id="axes-grid"></div>
-  </section>
-
-  <section id="road">
-    <div class="sh"><h2>2026 → 2050 로드맵</h2></div>
-    <p class="deck">구간마다 한 가지. 현금흐름(S2) 없이 갈아타기(S4)를 하면 대출에 목이 졸려 사업화를 못 함.</p>
-    <ul class="road" id="road-list"></ul>
   </section>
 
   <section id="ops">
@@ -311,17 +433,145 @@ td.nw{white-space:nowrap}
   function chip(axis){ var s=el('span','ax',AX[axis]||axis); s.dataset.axis=axis; return s; }
 
   /* header */
-  $('h-eyebrow').textContent = 'PM 보드 · ' + D.week.id + ' · ' + D.updated + ' 갱신';
-  $('h-title').textContent = D.week.range;
-  $('h-theme').textContent = D.week.theme;
+  var G = D.goal;
+  $('h-eyebrow').textContent = '자산증식 현황판 · ' + D.week.id + ' · ' + D.updated + ' 갱신';
+  $('h-title').textContent = G.title;
+  $('h-theme').textContent = G.home + ' + 금융 ' + G.financial + '억 = ' + G.target_networth + '억 · ' + G.plan_line;
   $('h-rule').textContent = D.principle;
-  $('wk-range').textContent = D.week.range + ' · ' + D.month.id;
+  $('wk-range').textContent = D.week.range + ' · ' + D.week.theme;
   $('wk-id').textContent = '이번 주 · ' + D.week.id;
   $('mo-id').textContent = '이번 달 · ' + D.month.id + ' — ' + D.month.theme;
-  $('st-next').textContent = D.next_pm.weekly;
-  $('st-next-s').textContent = '월간 ' + D.next_pm.monthly;
-  var days = Math.ceil((new Date(2030,11,31) - new Date(D.updated+'T00:00:00'))/86400000);
-  $('st-2030').textContent = days.toLocaleString('ko-KR') + '일';
+  var days = Math.ceil((new Date(G.deadline+'T00:00:00') - new Date(D.updated+'T00:00:00'))/86400000);
+  $('st-dday').textContent = days.toLocaleString('ko-KR') + '일';
+  var M = D.model, nw0 = M.start.re - M.start.debt + M.start.fin;
+  var ms34 = D.milestones.filter(function(m){return m.year===2034;})[0];
+  $('st-nw').textContent = nw0.toFixed(1) + ' → ' + ms34.nw + '억';
+  $('st-nw-s').textContent = '시작값 ' + M.start.asof + ' · 목표 ' + G.target_networth + '억';
+  (D.week.retro||[]).forEach(function(r){ $('retro-list').appendChild(el('li',null,r)); });
+  if(!(D.week.retro||[]).length) $('retro').hidden = true;
+
+  /* calculator */
+  $('goal-honest').textContent = G.honest;
+  var S = {gr:$('s-gr'), gf:$('s-gf'), s27:$('s-s27'), s30:$('s-s30'), price:$('s-price'), loan:$('s-loan')};
+  function manwon(v){ return v>=10000 ? (v/10000)+'억' : Number(v).toLocaleString('ko-KR')+'만'; }
+  function setPreset(pr){
+    S.gr.value=pr.gr; S.gf.value=pr.gf; S.s27.value=pr.s27; S.s30.value=pr.s30;
+    Array.prototype.forEach.call($('presets').children,function(b){ b.setAttribute('aria-pressed', String(b.dataset.id===pr.id)); });
+    calc();
+  }
+  M.presets.forEach(function(pr){
+    var b = el('button',null,pr.label); b.type='button'; b.dataset.id=pr.id;
+    b.addEventListener('click',function(){ setPreset(pr); });
+    $('presets').appendChild(b);
+  });
+  S.price.value = M.defaults.price; S.loan.value = M.defaults.loan;
+  function project(){
+    var gr=S.gr.value/100, gf=S.gf.value/100, s27=+S.s27.value, s30=+S.s30.value;
+    var R=M.start.re, Dt=M.start.debt, F=M.start.fin, pts=[{y:2026,v:R-Dt+F}];
+    for(var y=2027;y<=2034;y++){
+      var side = y>=2030 ? s30 : s27 + (s30-s27)*(y-2027)/3;
+      R*=1+gr; F=F*(1+gf)+(M.base_save_manwon+side*12*M.keep_ratio)/10000; Dt=Math.max(0,Dt-M.principal_manwon/10000);
+      pts.push({y:y,v:R-Dt+F});
+    }
+    return pts;
+  }
+  var NS='http://www.w3.org/2000/svg';
+  function svgEl(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  var tip = el('div','tip'); $('chart').appendChild(tip);
+  function draw(pts, need){
+    var old=$('chart').querySelector('svg'); if(old) old.remove();
+    var W=640,H=240,pl=40,pr=56,pt=14,pb=26, top=Math.max(60, Math.ceil(Math.max(need, pts[pts.length-1].v)/10)*10+5);
+    var x=function(y){return pl+(y-2026)/8*(W-pl-pr);}, yy=function(v){return H-pb-(v/top)*(H-pt-pb);};
+    var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'2026~2034 순자산 예상과 필요 순자산'});
+    for(var g=0; g<=top; g+=10){
+      svg.appendChild(svgEl('line',{x1:pl,x2:W-pr,y1:yy(g),y2:yy(g),stroke:'var(--line)','stroke-width':1}));
+      var t=svgEl('text',{x:pl-6,y:yy(g)+4,'text-anchor':'end','font-size':10,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'}); t.textContent=g+'억'; svg.appendChild(t);
+    }
+    [2026,2028,2030,2032,2034].forEach(function(y){ var t=svgEl('text',{x:x(y),y:H-8,'text-anchor':'middle','font-size':10,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'}); t.textContent=y; svg.appendChild(t); });
+    svg.appendChild(svgEl('line',{x1:pl,x2:W-pr,y1:yy(need),y2:yy(need),stroke:'var(--ink-2)','stroke-width':1.5,'stroke-dasharray':'5 4'}));
+    var nl=svgEl('text',{x:W-pr+4,y:yy(need)+4,'font-size':10.5,fill:'var(--ink-2)','font-family':'IBM Plex Sans KR, sans-serif'}); nl.textContent='필요 '+need.toFixed(0)+'억'; svg.appendChild(nl);
+    var d=pts.map(function(p,i){return (i?'L':'M')+x(p.y)+' '+yy(p.v);}).join(' ');
+    svg.appendChild(svgEl('path',{d:d+' L'+x(2034)+' '+yy(0)+' L'+x(2026)+' '+yy(0)+' Z',fill:'var(--accent)','fill-opacity':.08,stroke:'none'}));
+    svg.appendChild(svgEl('path',{d:d,fill:'none',stroke:'var(--accent)','stroke-width':2,'stroke-linejoin':'round'}));
+    pts.forEach(function(p,i){
+      var last=i===pts.length-1;
+      var c=svgEl('circle',{cx:x(p.y),cy:yy(p.v),r:last?5:4,fill:last?'var(--accent)':'var(--surface)',stroke:'var(--accent)','stroke-width':2});
+      var hit=svgEl('circle',{cx:x(p.y),cy:yy(p.v),r:12,fill:'transparent'});
+      hit.addEventListener('mouseenter',function(){ tip.textContent=p.y+' · 순자산 '+p.v.toFixed(1)+'억'; tip.style.opacity=1; var b=$('chart').getBoundingClientRect(), r=c.getBoundingClientRect(); tip.style.left=(r.left-b.left-30)+'px'; tip.style.top=(r.top-b.top-28)+'px'; });
+      hit.addEventListener('mouseleave',function(){ tip.style.opacity=0; });
+      svg.appendChild(c); svg.appendChild(hit);
+    });
+    var ll=svgEl('text',{x:x(2034)+8,y:yy(pts[pts.length-1].v)+4,'font-size':11,'font-weight':600,fill:'var(--accent)','font-family':'IBM Plex Mono, monospace'}); ll.textContent=pts[pts.length-1].v.toFixed(1)+'억'; svg.appendChild(ll);
+    $('chart').insertBefore(svg, tip);
+  }
+  function calc(){
+    $('v-gr').textContent=(+S.gr.value).toFixed(1)+'%'; $('v-gf').textContent=(+S.gf.value).toFixed(1)+'%';
+    $('v-s27').textContent='월 '+manwon(+S.s27.value); $('v-s30').textContent='월 '+manwon(+S.s30.value);
+    $('v-price').textContent=S.price.value+'억'; $('v-loan').textContent=S.loan.value+'억';
+    var pts=project(), nw=pts[pts.length-1].v, need=(+S.price.value)*(1+M.tax_rate)-(+S.loan.value)+G.financial;
+    $('r-nw').textContent=nw.toFixed(1)+'억'; $('r-need').textContent=need.toFixed(1)+'억';
+    var gap=nw-need, v=$('r-verdict'); v.textContent='';
+    var b=el('b',null, gap>=0 ? '2034년 입성 + 금융 10억 가능.' : (gap>-10 ? '2034년에 '+(-gap).toFixed(1)+'억 모자람.' : '2034년에 '+(-gap).toFixed(1)+'억 모자람 — 부업 축을 키워야 함.'));
+    v.appendChild(b);
+    v.appendChild(document.createTextNode(gap>=0 ? ' 남는 돈은 평형을 키우거나 금융자산으로.' : ' 59㎡로 먼저 들어가거나, 1~2년 늦추거나, 부업 월수익을 올리면 메워짐.'));
+    draw(pts, need);
+  }
+  Object.keys(S).forEach(function(k){ S[k].addEventListener('input',function(){ Array.prototype.forEach.call($('presets').children,function(b){b.setAttribute('aria-pressed','false');}); calc(); }); });
+  setPreset(M.presets.filter(function(p){return p.id==='plan';})[0]);
+
+  /* samboo */
+  var SB = D.samboo;
+  $('sb-rule').textContent = SB.rule;
+  SB.facts.forEach(function(f){ $('sb-facts').appendChild(el('li',null,f)); });
+  SB.timeline.forEach(function(t,i){ var li=el('li', t.done?'done':(i===SB.timeline.length-1?'last':'')); li.appendChild(el('span','w',t.when)); li.appendChild(el('span',null,t.what)); $('sb-time').appendChild(li); });
+  D.routes.forEach(function(r){
+    var c=el('article','route'+(r.id==='A'?' main':''));
+    var t=el('div','rt'); t.appendChild(el('span','rid',r.id)); t.appendChild(el('h3',null,r.name)); t.appendChild(el('span','pill rv '+(r.id==='A'?'p-ok':'p-check'),r.verdict)); c.appendChild(t);
+    c.appendChild(el('p',null,r.why)); c.appendChild(el('div','rm',r.when+' · 필요: '+r.need));
+    $('routes').appendChild(c);
+  });
+  var srcp=$('sb-src'); srcp.appendChild(document.createTextNode('출처: '));
+  SB.sources.forEach(function(s,i){ var a=el('a',null,s.name); a.href=s.url; a.target='_blank'; a.rel='noopener'; srcp.appendChild(a); if(i<SB.sources.length-1) srcp.appendChild(document.createTextNode(' · ')); });
+  srcp.appendChild(document.createTextNode(' — 사업 일정·가격은 추정이라 매 분기 다시 확인함.'));
+
+  /* milestones */
+  D.milestones.forEach(function(m){
+    var tr=el('tr', m.now?'now':(m.goal?'goal':''));
+    tr.appendChild(el('td','mono',String(m.year))); tr.appendChild(el('td','mono','만 '+(m.year-G.birth)));
+    tr.appendChild(el('td','mono nw',m.nw+'억')); tr.appendChild(el('td','nw',m.side)); tr.appendChild(el('td',null,m.key));
+    $('ms-body').appendChild(tr);
+  });
+
+  /* income */
+  var PICK={do:['p-do','지금'],later:['p-laterx','나중'],no:['p-no','안 함']};
+  D.income.forEach(function(r){
+    var tr=el('tr', r.key?'key':'');
+    var td0=el('td'); td0.appendChild(el('span','pill '+PICK[r.pick][0],PICK[r.pick][1])); tr.appendChild(td0);
+    var td1=el('td'); td1.appendChild(chip(r.axis)); tr.appendChild(td1);
+    tr.appendChild(el('td',null,r.name)); tr.appendChild(el('td','nw',r.size)); tr.appendChild(el('td',null,r.start)); tr.appendChild(el('td',null,r.note));
+    $('inc-body').appendChild(tr);
+  });
+
+  /* trends */
+  var T=D.trends;
+  $('tr-asof').textContent=T.asof; $('tr-cav').textContent=T.caveat;
+  T.groups.forEach(function(g){
+    var w=el('div','tg'); w.appendChild(el('h3',null,g.title)); w.appendChild(el('p','tgs',g.sub));
+    var grid=el('div','tcards');
+    g.items.forEach(function(it){
+      var c=el('article','tcard');
+      var h=el('div','tch'); h.appendChild(el('b',null,it.name)); h.appendChild(el('span','pill '+PICK[it.pick][0],PICK[it.pick][1])); c.appendChild(h);
+      c.appendChild(el('p','tf',it.fact));
+      var m=el('p','tm'); m.appendChild(el('span','lbl','유상 버전 ')); m.appendChild(document.createTextNode(it.mine)); c.appendChild(m);
+      grid.appendChild(c);
+    });
+    w.appendChild(grid); $('tr-groups').appendChild(w);
+  });
+  var tsrc=$('tr-src'); tsrc.appendChild(document.createTextNode('출처: '));
+  T.sources.forEach(function(s,i){ var a=el('a',null,s.name); a.href=s.url; a.target='_blank'; a.rel='noopener'; tsrc.appendChild(a); if(i<T.sources.length-1) tsrc.appendChild(document.createTextNode(' · ')); });
+
+  /* stamina */
+  D.stamina.forEach(function(r){ var d=el('div'); d.appendChild(el('b',null,r.rule)); d.appendChild(el('span',null,r.how)); $('rules').appendChild(d); });
 
   /* tasks */
   var boxes = [];
@@ -374,8 +624,9 @@ td.nw{white-space:nowrap}
     if(r.status==='none') nNone++; else if(r.status==='check') nCheck++;
     $('inv-body').appendChild(tr);
   });
-  $('st-inv').textContent = nNone + ' · ' + nCheck;
-  $('st-inv-s').textContent = '미업로드 '+nNone+'건 · 확인 필요 '+nCheck+'건';
+  var bl=D.backlog||{}; var blt=Object.keys(bl).reduce(function(a,k){return a+bl[k].n;},0);
+  $('st-inv').textContent = blt+'개';
+  $('st-inv-s').textContent = Object.keys(bl).map(function(k){return bl[k].label+' '+bl[k].n;}).join(' · ');
 
   /* cadence */
   D.weekgrid.forEach(function(d){
@@ -439,14 +690,6 @@ td.nw{white-space:nowrap}
     }
     var st = el('p','stop'); st.appendChild(el('b',null,'선')); st.appendChild(document.createTextNode(a.stop)); c.appendChild(st);
     $('axes-grid').appendChild(c);
-  });
-
-  /* roadmap */
-  D.roadmap.forEach(function(r){
-    var li = el('li', r.now?'now':(r.goal_mark?'goal':''));
-    li.appendChild(el('span','w',r.when));
-    var b = el('div'); b.appendChild(el('b',null,r.name)); b.appendChild(el('span',null,r.goal)); li.appendChild(b);
-    $('road-list').appendChild(li);
   });
 
   /* notes */
