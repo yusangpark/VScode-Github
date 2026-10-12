@@ -48,6 +48,16 @@ def load_config(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def blog_stats(blog_id):
+    """네이버 모바일 블로그 API의 공개 숫자 (오늘 방문·이웃·누적 방문)."""
+    req = urllib.request.Request(f"https://m.blog.naver.com/api/blogs/{blog_id}",
+                                 headers={"User-Agent": "Mozilla/5.0 (iPhone)",
+                                          "Referer": f"https://m.blog.naver.com/{blog_id}"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        res = json.loads(r.read())["result"]
+    return res["dayVisitorCount"], res["subscriberCount"], res["totalVisitorCount"]
+
+
 def read_feed(source):
     """URL이나 로컬 파일에서 RSS/Atom을 읽어 [(제목, 링크, 날짜)]로."""
     if re.match(r"https?://", source):
@@ -137,6 +147,18 @@ def main():
     lines = [f"# 업로드 대조 — {datetime.now():%Y-%m-%d %H:%M}", "",
              "`python3 scripts/pm_sync.py`가 만든 파일임. 주간 PM 때 클로드가 읽고 `PM/pm_data.json` inventory에 반영함.", ""]
     summary = []
+    lines += ["## 블로그 공개 숫자", "", "| 블로그 | 오늘 방문 | 이웃 | 누적 방문 |", "|---|---|---|---|"]
+    for axis, c in cfg["channels"].items():
+        m = re.search(r"rss\.blog\.naver\.com/([^.]+)\.xml", c.get("rss", ""))
+        if not m:
+            continue
+        try:
+            day, subs, total = blog_stats(m.group(1))
+            lines.append(f"| {c['label']} | {day:,} | {subs:,} | {total:,} |")
+            summary.append(f"{c['label']}: 오늘 방문 {day:,} · 이웃 {subs:,}")
+        except Exception as e:  # 통계는 부가 정보라 실패해도 대조는 계속함
+            lines.append(f"| {c['label']} | 못 읽음 ({e}) | | |")
+    lines.append("")
     for axis, c in cfg["channels"].items():
         label = c["label"]
         src = overrides.get(axis) or c.get("rss")
